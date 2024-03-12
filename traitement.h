@@ -16,5 +16,8 @@ void print_liste_regles(liste_regles *liste);
 liste_faits *init_liste_faits();
 void add_fait(liste_faits *liste, char *fait);
 void print_liste_faits(liste_faits *liste);
+void free_liste_faits(liste_faits *liste);
+void free_liste_regles(liste_regles *liste);
+void free_liste_conditions(liste_conditions *liste);
 
 #endif //ALGO_S6_TRAITEMENT_H

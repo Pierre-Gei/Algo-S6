@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 DEPS = backwards.h forward.h structures.h traitement.h save.h
 OBJ = main.o backwards.o forward.o traitement.o save.o
 
@@ -15,3 +15,6 @@ compile: clean main
 
 main: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS)
+
+valgrind: main
+	valgrind --leak-check=full --leak-resolution=med --track-origins=yes --vgdb=no ./main

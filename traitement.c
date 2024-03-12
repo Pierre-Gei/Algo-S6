@@ -24,11 +24,17 @@ liste_conditions *init_liste_conditions(){
 }
 void add_regle(liste_regles *liste, char *name, liste_conditions *conditions){
     liste_regles *new = malloc(sizeof(liste_regles));
-    new->name = malloc(strlen(name) + 1);  // Allocate an extra byte for the null terminator
-    strncpy(new->name, name, strlen(name) + 1);  // Copy the string and the null terminator
-    new->conditions = conditions;
-    new->suivant = NULL;
-    liste_regles *tmp = liste;
+new->name = malloc(strlen(name) + 1);  // Allocate an extra byte for the null terminator
+strncpy(new->name, name, strlen(name) + 1);  // Copy the string and the null terminator
+new->conditions = conditions;
+new->suivant = NULL;
+liste_regles *tmp = liste;
+if(tmp->name == NULL){
+    tmp->name = new->name;
+    tmp->conditions = new->conditions;
+    free(new);  // Free the memory allocated for the new liste_regles
+    return;
+}
     while(tmp->suivant != NULL){
         tmp = tmp->suivant;
     }
@@ -112,5 +118,36 @@ void print_liste_faits(liste_faits *liste){
             printf("%s;\n", tmp->fait);
         }
         tmp = tmp->suivant;
+    }
+}
+
+void free_liste_regles(liste_regles *liste){
+    liste_regles *tmp = liste;
+    while(tmp != NULL){
+        liste_regles *next = tmp->suivant;
+        free(tmp->name);
+        free_liste_conditions(tmp->conditions);
+        free(tmp);
+        tmp = next;
+    }
+}
+
+void free_liste_conditions(liste_conditions *liste){
+    liste_conditions *tmp = liste;
+    while(tmp != NULL){
+        liste_conditions *next = tmp->suivant;
+        free(tmp->name);
+        free(tmp);
+        tmp = next;
+    }
+}
+
+void free_liste_faits(liste_faits *liste){
+    liste_faits *tmp = liste;
+    while(tmp != NULL){
+        liste_faits *next = tmp->suivant;
+        free(tmp->fait);
+        free(tmp);
+        tmp = next;
     }
 }

@@ -21,5 +21,7 @@ int main(void){
     } else {
         printf("On ne peut pas atteindre %s \n", but);
     }
+    free_liste_regles(liste);
+    free_liste_faits(faits);
     return 0;
 }
