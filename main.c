@@ -4,17 +4,21 @@
 
 #include "stdio.h"
 #include "stdlib.h"
+#include "stdbool.h"
 #include "structures.h"
 #include "save.h"
 #include "traitement.h"
+#include "backwards.h"
 
 int main(void){
-    printf("Hello world");
     liste_regles *liste = init_liste_regles();
-    printf("init_liste_regles\n");
     load_to_list("regles.kbs", liste);
-    printf("load_to_list\n");
-    print_liste_regles(liste);
-
+    liste_faits *faits = init_liste_faits();
+    load_faits_to_list("faits.kbs", faits);
+    if(chainage_arriere("pain_au_chocolat", liste, faits) == true){
+        printf("goal is true\n");
+    } else {
+        printf("goal is false\n");
+    }
     return 0;
 }
