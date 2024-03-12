@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "forward.h": "c",
+        "structures.h": "c",
+        "stdlib.h": "c",
+        "traitement.h": "c"
+    }
+}
