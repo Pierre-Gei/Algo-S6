@@ -68,15 +68,49 @@ void print_liste_regles(liste_regles *liste){
             liste_conditions *tmp_conditions = tmp->conditions;
             while(tmp_conditions != NULL){
                 if(tmp_conditions->name != NULL){
-                    printf("%s", tmp_conditions->name);
+                    printf("%s ", tmp_conditions->name);
                 }
                 tmp_conditions = tmp_conditions->suivant;
             }
         }
         if(tmp->name != NULL){
-            printf("->%s", tmp->name);
+            printf("-> %s;", tmp->name);
         }
         printf("\n");
+        tmp = tmp->suivant;
+    }
+}
+
+liste_faits *init_liste_faits(){
+    liste_faits *liste = malloc(sizeof(liste_faits));
+    liste->fait = NULL;
+    liste->suivant = NULL;
+    return liste;
+}
+
+void add_fait(liste_faits *liste, char *fait){
+    liste_faits *new = malloc(sizeof(liste_faits));
+    new->fait = malloc(strlen(fait) + 1);  // Allocate an extra byte for the null terminator
+    strncpy(new->fait, fait, strlen(fait) + 1);  // Copy the string and the null terminator
+    new->suivant = NULL;
+    liste_faits *tmp = liste;
+    while(tmp->suivant != NULL){
+        tmp = tmp->suivant;
+    }
+    tmp->suivant = new;
+}
+
+void print_liste_faits(liste_faits *liste){
+    printf("Printing list of facts:\n");
+    if(liste == NULL){
+        printf("List is empty.\n");
+        return;
+    }
+    liste_faits *tmp = liste;
+    while(tmp != NULL){
+        if(tmp->fait != NULL){
+            printf("%s;\n", tmp->fait);
+        }
         tmp = tmp->suivant;
     }
 }
