@@ -9,6 +9,8 @@
 
 bool chainage_arriere(char *But, liste_regles *Base_de_regles, liste_faits *Base_de_faits){
     if(fait_exists(Base_de_faits, But)){
+        // Print the fact and the Rule that makes it
+        printf("Fact exists: %s\n", But);
         return true;
     }
     else{
@@ -40,6 +42,7 @@ bool chainage_arriere(char *But, liste_regles *Base_de_regles, liste_faits *Base
     }
     return false;
 }
+
 bool fait_exists(liste_faits *Base_de_faits, char *fait){
     liste_faits *tmp = Base_de_faits;
     while(tmp != NULL){
