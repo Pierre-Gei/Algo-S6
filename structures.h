@@ -16,4 +16,14 @@ typedef struct liste_conditions {
     struct liste_conditions *suivant;
 } liste_conditions;
 
+typedef struct liste_faits {
+    char * fait;
+    struct liste_faits *suivant;
+} liste_faits;
+
+typedef struct liste_reponses {
+    char *name;
+    struct liste_reponses *suivant;
+} liste_reponses;
+
 #endif //ALGO_S6_STRUCTURES_H
