@@ -107,7 +107,6 @@ void add_fait(liste_faits *liste, char *fait){
 }
 
 void print_liste_faits(liste_faits *liste){
-    printf("Printing list of facts:\n");
     if(liste == NULL){
         printf("List is empty.\n");
         return;
