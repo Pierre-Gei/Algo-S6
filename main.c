@@ -17,5 +17,7 @@
 int main(void)
 {
     menu();
+    char *but = "pain_au_chocolat";
+    liberer_liste_faits(&faits);
     return 0;
 }
