@@ -3,3 +3,8 @@
 //
 
 #include "save.h"
+#include "stdio.h"
+#include "stdlib.h"
+#include "structures.h"
+
+void load_to_list(){}

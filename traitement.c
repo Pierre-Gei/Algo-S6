@@ -3,3 +3,6 @@
 //
 
 #include "traitement.h"
+#include "stdio.h"
+
+
