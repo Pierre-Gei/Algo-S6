@@ -9,10 +9,10 @@
 #include "save.h"
 #include "traitement.h"
 #include "backwards.h"
-#include "forward.h"
+#include "terminal_menu.h"
 
-int main(void)
-{
+int main(void){
+    menu();
     char *but = "pain_au_chocolat";
     liste_regles *liste = NULL;
     load_to_list("regles.kbs", &liste);
