@@ -19,18 +19,17 @@ int main(void)
     liste_faits *faits = NULL;
     load_faits_to_list("faits.kbs", &faits);
     if(chainage_arriere(but, liste, faits) == true){
+    if(chainage_arriere(but, liste, faits, faits_manquants) == true){
         printf("On peut atteindre %s \n", but);
     } else {
         printf("On ne peut pas atteindre %s \n", but);
     }
-
     liste_reponses *reponses = NULL;
-
     parcours(faits, liste, &reponses);
     affiche_liste_reponses(reponses);
-
     liberer_liste_reponses(&reponses);
     liberer_liste_faits(&faits);
     liberer_liste_regles(&liste);
+    printf("Faits manquants: \n");
     return 0;
 }
