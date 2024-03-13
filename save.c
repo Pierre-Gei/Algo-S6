@@ -2,13 +2,7 @@
 // Created by Pierre Geiguer on 12/03/2024.
 //
 
-#include <string.h>
-#include <ctype.h>
 #include "save.h"
-#include "stdio.h"
-#include "stdlib.h"
-#include "structures.h"
-#include "traitement.h"
 
 void load_to_list(char *filename, liste_regles **liste)
 {
@@ -50,23 +44,30 @@ void load_to_list(char *filename, liste_regles **liste)
 }
 
 
-void load_faits_to_list(char *filename, liste_faits **liste)
+void load_faits_to_list_recursive(FILE *file, liste_faits **liste) 
 {
-    FILE *file = fopen(filename, "r");
-    if(file == NULL){
-        printf("Error while opening file");
-        exit(1);
-    }
     char *line = NULL;
     size_t len = 0;
     ssize_t read;
-    while((read = getline(&line, &len, file)) != -1){
+    if ((read = getline(&line, &len, file)) != -1) {
         char *token = strtok(line, ";\n");
-        if(token == NULL){
-            continue;
+        if (token != NULL) {
+            add_fait(liste, token);
         }
-        add_fait(liste, token);
+        free(line);
+        load_faits_to_list_recursive(file, liste);
+    } else {
+        free(line);
+        fclose(file);
     }
-    free(line);
-    fclose(file);
+}
+
+void load_faits_to_list(char *filename, liste_faits **liste) 
+{
+    FILE *file = fopen(filename, "r");
+    if (file == NULL) {
+        printf("Error while opening file");
+        exit(1);
+    }
+    load_faits_to_list_recursive(file, liste);
 }

@@ -49,9 +49,6 @@ Parcours de la liste de reglès tant que la liste de réponses n'est pas fixée
 */
 int parcours(liste_faits *faits, liste_regles *regles, liste_reponses **reponses);
 
-/*Libérer la mémoire d'une liste de réponses*/
-void  liberer_liste_reponses(liste_reponses **liste);
-
 /*
 Eviter les doublons dans une liste de réponses
 @return 1 si la réponse est déjà dans la liste, 0 sinon
@@ -63,15 +60,6 @@ Eviter les doublons dans une liste de faits
 @return 1 si le fait est déjà dans la liste, 0 sinon
 */
 int doublon_fait (liste_faits *liste, char *fait);
-
-/*Libérer la mémoire d'une liste de faits*/
-void liberer_liste_faits(liste_faits **liste);
-
-/*Libérer la mémoire d'une liste de conditions*/
-void liberer_liste_conditions(liste_conditions **liste);
-
-/*Libérer la mémoire d'une liste de règles*/
-void liberer_liste_regles(liste_regles **liste);
 
 
 #endif //ALGO_S6_FORWARD_H
