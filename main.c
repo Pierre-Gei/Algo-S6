@@ -13,52 +13,52 @@
 
 int main(void)
 {
-    // char *but = "pain_au_chocolat";
-    // liste_regles *liste = init_liste_regles();
-    // load_to_list("regles.kbs", liste);
-    // liste_faits *faits = init_liste_faits();
-    // load_faits_to_list("faits.kbs", faits);
-    // if(chainage_arriere(but, liste, faits) == true){
-    //     printf("On peut atteindre %s \n", but);
-    // } else {
-    //     printf("On ne peut pas atteindre %s \n", but);
-    // }
+    char *but = "pain_au_chocolat";
     liste_regles *liste = NULL;
-    // rempli la liste
-    liste_conditions *conditions = NULL;
-    // remplis toi meme la liste conditions et ajoute la à la liste regles
-    conditions = ajout_condition(conditions, "tomate_sechee");
-    conditions = ajout_condition(conditions, "oignon");
-    conditions = ajout_condition(conditions, "epice");
-
-    liste = ajout_regle(liste, "sauce", conditions);
-
-    conditions = NULL;
-    conditions = ajout_condition(conditions, "plante");
-
-    liste = ajout_regle(liste, "tomate", conditions);
-
-    affiche_liste_regle(liste);
-
+    load_to_list("regles.kbs", &liste);
     liste_faits *faits = NULL;
-    faits = ajout_fait(faits, "plante_aromatique");
-    faits = ajout_fait(faits, "oignon");
-    affiche_liste_faits(faits);
-
-    liste_reponses *reponses = NULL;
-
-    char * but = "sauce";
-     if(chainage_arriere(but, liste, faits) == true){
+    load_faits_to_list("faits.kbs", &faits);
+    if(chainage_arriere(but, liste, faits) == true){
         printf("On peut atteindre %s \n", but);
     } else {
         printf("On ne peut pas atteindre %s \n", but);
     }
+    // liste_regles *liste = NULL;
+    // // rempli la liste
+    // liste_conditions *conditions = NULL;
+    // // remplis toi meme la liste conditions et ajoute la à la liste regles
+    // conditions = ajout_condition(conditions, "tomate_sechee");
+    // conditions = ajout_condition(conditions, "oignon");
+    // conditions = ajout_condition(conditions, "epice");
+
+    // liste = ajout_regle(liste, "sauce", conditions);
+
+    // conditions = NULL;
+    // conditions = ajout_condition(conditions, "plante");
+
+    // liste = ajout_regle(liste, "tomate", conditions);
+
+    // affiche_liste_regle(liste);
+
+    // liste_faits *faits = NULL;
+    // faits = ajout_fait(faits, "plante_aromatique");
+    // faits = ajout_fait(faits, "oignon");
+    // affiche_liste_faits(faits);
+
+    liste_reponses *reponses = NULL;
+
+    // char * but = "sauce";
+    //  if(chainage_arriere(but, liste, faits) == true){
+    //     printf("On peut atteindre %s \n", but);
+    // } else {
+    //     printf("On ne peut pas atteindre %s \n", but);
+    // }
 
     parcours(faits, liste, &reponses);
     affiche_liste_reponses(reponses);
 
-    liberer_liste_reponses(&reponses);
-    liberer_liste_faits(&faits);
-    liberer_liste_regles(&liste);
+    // liberer_liste_reponses(&reponses);
+    // liberer_liste_faits(&faits);
+    // liberer_liste_regles(&liste);
     return 0;
 }

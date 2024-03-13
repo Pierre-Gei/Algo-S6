@@ -8,78 +8,105 @@
 #include "stdlib.h"
 #include "structures.h"
 
-liste_regles *init_liste_regles(){
-    liste_regles *liste = malloc(sizeof(liste_regles));
-    liste->name = NULL;
-    liste->conditions = NULL;
-    liste->suivant = NULL;
-    return liste;
-}
-
-liste_conditions *init_liste_conditions(){
-    liste_conditions *liste = malloc(sizeof(liste_conditions));
-    liste->name = NULL;
-    liste->suivant = NULL;
-    return liste;
-}
-void add_regle(liste_regles *liste, char *name, liste_conditions *conditions){
+void add_regle(liste_regles **liste, char *name, liste_conditions *conditions)
+{
     liste_regles *new = malloc(sizeof(liste_regles));
-new->name = malloc(strlen(name) + 1);  // Allocate an extra byte for the null terminator
-strncpy(new->name, name, strlen(name) + 1);  // Copy the string and the null terminator
-new->conditions = conditions;
-new->suivant = NULL;
-liste_regles *tmp = liste;
-if(tmp->name == NULL){
-    tmp->name = new->name;
-    tmp->conditions = new->conditions;
-    free(new);  // Free the memory allocated for the new liste_regles
-    return;
-}
-    while(tmp->suivant != NULL){
-        tmp = tmp->suivant;
+    if (new == NULL) {
+        printf("Erreur: Impossible d'allouer de la mémoire\n");
+        exit(1);
     }
-    tmp->suivant = new;
-}
 
-void add_condition(liste_conditions *liste, char *name){
-    liste_conditions *new = malloc(sizeof(liste_conditions));
-    new->name = malloc(strlen(name) + 1);  // Allocate an extra byte for the null terminator
-    strncpy(new->name, name, strlen(name) + 1);  // Copy the string and the null terminator
+    new->name = malloc(strlen(name) + 1); // Allouer un octet supplémentaire pour le terminateur nul
+    if (new->name == NULL) {
+        printf("Erreur: Impossible d'allouer de la mémoire\n");
+        exit(1);
+    }
+    strcpy(new->name, name);
+
+    new->conditions = conditions;
     new->suivant = NULL;
-    liste_conditions *tmp = liste;
-    while(tmp->suivant != NULL){
+
+    if (*liste == NULL) {
+        *liste = new; // Si la liste est vide, le nouvel élément devient le premier
+        return;
+    }
+
+    liste_regles *tmp = *liste;
+    while (tmp->suivant != NULL) {
         tmp = tmp->suivant;
     }
-    tmp->suivant = new;
+    tmp->suivant = new; // Ajouter le nouvel élément à la fin de la liste
 }
 
-void add_condition_to_regle(liste_regles *liste, char *name_regle, char *name_condition){
-    liste_regles *tmp = liste;
-    while(tmp->suivant != NULL){
-        if(tmp->name == name_regle){
-            add_condition(tmp->conditions, name_condition);
+
+void add_condition(liste_conditions **liste, char *name)
+{
+    liste_conditions *new = malloc(sizeof(liste_conditions));
+    if (new == NULL) {
+        printf("Erreur: Impossible d'allouer de la mémoire\n");
+        exit(1);
+    }
+    new->name = malloc(strlen(name) + 1); // Allouer un octet supplémentaire pour le terminateur nul
+    if (new->name == NULL) {
+        printf("Erreur: Impossible d'allouer de la mémoire\n");
+        exit(1);
+    }
+    strcpy(new->name, name);
+    new->suivant = NULL;
+
+    if (*liste == NULL) {
+        *liste = new; // Si la liste est vide, le nouvel élément devient le premier
+        return;
+    }
+
+    liste_conditions *tmp = *liste;
+    while (tmp->suivant != NULL) {
+        tmp = tmp->suivant;
+    }
+    tmp->suivant = new; // Ajouter le nouvel élément à la fin de la liste
+}
+
+
+void add_condition_to_regle(liste_regles **liste, char *name_regle, char *name_condition)
+{
+    liste_regles *tmp = *liste;
+    while (tmp != NULL)
+    {
+        if (strcmp(tmp->name, name_regle) == 0) // Utilisation de strcmp pour comparer les chaînes de caractères
+        {
+            add_condition(&(tmp->conditions), name_condition); // Passer l'adresse du pointeur de liste_conditions
+            return; // Sortir de la fonction une fois que la condition est ajoutée à la règle
         }
         tmp = tmp->suivant;
     }
+    printf("Erreur: La règle '%s' n'existe pas dans la liste.\n", name_regle);
 }
 
-void print_liste_regles(liste_regles *liste){
-    if(liste == NULL){
+
+void print_liste_regles(liste_regles *liste)
+{
+    if (liste == NULL)
+    {
         printf("List is empty.\n");
         return;
     }
     liste_regles *tmp = liste;
-    while(tmp != NULL){
-        if(tmp->conditions != NULL){
+    while (tmp != NULL)
+    {
+        if (tmp->conditions != NULL)
+        {
             liste_conditions *tmp_conditions = tmp->conditions;
-            while(tmp_conditions != NULL){
-                if(tmp_conditions->name != NULL){
+            while (tmp_conditions != NULL)
+            {
+                if (tmp_conditions->name != NULL)
+                {
                     printf("%s ", tmp_conditions->name);
                 }
                 tmp_conditions = tmp_conditions->suivant;
             }
         }
-        if(tmp->name != NULL){
+        if (tmp->name != NULL)
+        {
             printf("-> %s;", tmp->name);
         }
         printf("\n");
@@ -87,43 +114,58 @@ void print_liste_regles(liste_regles *liste){
     }
 }
 
-liste_faits *init_liste_faits(){
-    liste_faits *liste = malloc(sizeof(liste_faits));
-    liste->fait = NULL;
-    liste->suivant = NULL;
-    return liste;
-}
-
-void add_fait(liste_faits *liste, char *fait){
+void add_fait(liste_faits **liste, char *fait)
+{
     liste_faits *new = malloc(sizeof(liste_faits));
-    new->fait = malloc(strlen(fait) + 1);  // Allocate an extra byte for the null terminator
-    strncpy(new->fait, fait, strlen(fait) + 1);  // Copy the string and the null terminator
+    if (new == NULL) {
+        printf("Erreur: Impossible d'allouer de la mémoire\n");
+        exit(1);
+    }
+    new->fait = malloc(strlen(fait) + 1); // Allouer un octet supplémentaire pour le terminateur nul
+    if (new->fait == NULL) {
+        printf("Erreur: Impossible d'allouer de la mémoire\n");
+        exit(1);
+    }
+    strcpy(new->fait, fait);
     new->suivant = NULL;
-    liste_faits *tmp = liste;
-    while(tmp->suivant != NULL){
+
+    if (*liste == NULL) {
+        *liste = new; // Si la liste est vide, le nouvel élément devient le premier
+        return;
+    }
+
+    liste_faits *tmp = *liste;
+    while (tmp->suivant != NULL) {
         tmp = tmp->suivant;
     }
-    tmp->suivant = new;
+    tmp->suivant = new; // Ajouter le nouvel élément à la fin de la liste
 }
 
-void print_liste_faits(liste_faits *liste){
+
+void print_liste_faits(liste_faits *liste)
+{
     printf("Printing list of facts:\n");
-    if(liste == NULL){
+    if (liste == NULL)
+    {
         printf("List is empty.\n");
         return;
     }
     liste_faits *tmp = liste;
-    while(tmp != NULL){
-        if(tmp->fait != NULL){
+    while (tmp != NULL)
+    {
+        if (tmp->fait != NULL)
+        {
             printf("%s;\n", tmp->fait);
         }
         tmp = tmp->suivant;
     }
 }
 
-void free_liste_regles(liste_regles *liste){
+void free_liste_regles(liste_regles *liste)
+{
     liste_regles *tmp = liste;
-    while(tmp != NULL){
+    while (tmp != NULL)
+    {
         liste_regles *next = tmp->suivant;
         free(tmp->name);
         free_liste_conditions(tmp->conditions);
@@ -132,9 +174,11 @@ void free_liste_regles(liste_regles *liste){
     }
 }
 
-void free_liste_conditions(liste_conditions *liste){
+void free_liste_conditions(liste_conditions *liste)
+{
     liste_conditions *tmp = liste;
-    while(tmp != NULL){
+    while (tmp != NULL)
+    {
         liste_conditions *next = tmp->suivant;
         free(tmp->name);
         free(tmp);
@@ -142,9 +186,11 @@ void free_liste_conditions(liste_conditions *liste){
     }
 }
 
-void free_liste_faits(liste_faits *liste){
+void free_liste_faits(liste_faits *liste)
+{
     liste_faits *tmp = liste;
-    while(tmp != NULL){
+    while (tmp != NULL)
+    {
         liste_faits *next = tmp->suivant;
         free(tmp->fait);
         free(tmp);
@@ -152,8 +198,7 @@ void free_liste_faits(liste_faits *liste){
     }
 }
 
-
-liste_conditions * ajout_condition(liste_conditions *liste, char *condition)
+liste_conditions *ajout_condition(liste_conditions *liste, char *condition)
 {
     // Si la liste est vide
     if (liste == NULL)
@@ -165,7 +210,8 @@ liste_conditions * ajout_condition(liste_conditions *liste, char *condition)
             exit(1);
         }
         liste->name = (char *)malloc(strlen(condition) + 1);
-        if (liste->name == NULL) {
+        if (liste->name == NULL)
+        {
             printf("Erreur: Impossible d'allouer de la mémoire\n");
             exit(1);
         }
@@ -179,9 +225,7 @@ liste_conditions * ajout_condition(liste_conditions *liste, char *condition)
     return liste;
 }
 
-
-
-liste_regles * ajout_regle (liste_regles * liste, char * regle, liste_conditions * conditions)
+liste_regles *ajout_regle(liste_regles *liste, char *regle, liste_conditions *conditions)
 {
     // Si la liste est vide
     if (liste == NULL)
@@ -193,7 +237,8 @@ liste_regles * ajout_regle (liste_regles * liste, char * regle, liste_conditions
             exit(1);
         }
         liste->name = (char *)malloc(strlen(regle) + 1);
-        if (liste->name == NULL) {
+        if (liste->name == NULL)
+        {
             printf("Erreur: Impossible d'allouer de la mémoire\n");
             exit(1);
         }
@@ -208,14 +253,14 @@ liste_regles * ajout_regle (liste_regles * liste, char * regle, liste_conditions
     return liste;
 }
 
-void affiche_liste_regle (liste_regles * liste)
+void affiche_liste_regle(liste_regles *liste)
 {
     if (liste == NULL)
     {
         printf("Liste vide\n");
         return;
     }
-    liste_regles * tmp = liste;
+    liste_regles *tmp = liste;
     while (tmp != NULL)
     {
         printf("%s\n", tmp->name);
@@ -224,14 +269,14 @@ void affiche_liste_regle (liste_regles * liste)
     }
 }
 
-void affiche_liste_condition (liste_conditions * liste)
+void affiche_liste_condition(liste_conditions *liste)
 {
     if (liste == NULL)
     {
         printf("Liste vide\n");
         return;
     }
-    liste_conditions * tmp = liste;
+    liste_conditions *tmp = liste;
     while (tmp != NULL)
     {
         printf("%s\n", tmp->name);

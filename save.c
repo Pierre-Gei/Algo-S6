@@ -10,7 +10,8 @@
 #include "structures.h"
 #include "traitement.h"
 
-void load_to_list(char *filename, liste_regles *liste){
+void load_to_list(char *filename, liste_regles **liste)
+{
     FILE *file = fopen(filename, "r");
     if(file == NULL){
         printf("Error while opening file");
@@ -36,10 +37,10 @@ void load_to_list(char *filename, liste_regles *liste){
             while(end > regle && isspace((unsigned char)*end)) end--;
             *(end+1) = 0;
         }
-        liste_conditions *liste_conditions = init_liste_conditions();
+        liste_conditions *liste_conditions = NULL;
         char *condition = strtok(conditions, " "); // Split conditions by space
         while(condition != NULL){
-            add_condition(liste_conditions, condition);
+            add_condition(&liste_conditions, condition);
             condition = strtok(NULL, " "); // Split conditions by space
         }
         add_regle(liste, regle, liste_conditions);
@@ -49,7 +50,8 @@ void load_to_list(char *filename, liste_regles *liste){
 }
 
 
-void load_faits_to_list(char *filename, liste_faits *liste){
+void load_faits_to_list(char *filename, liste_faits **liste)
+{
     FILE *file = fopen(filename, "r");
     if(file == NULL){
         printf("Error while opening file");
