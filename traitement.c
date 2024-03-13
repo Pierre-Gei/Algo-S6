@@ -151,3 +151,90 @@ void free_liste_faits(liste_faits *liste){
         tmp = next;
     }
 }
+
+
+liste_conditions * ajout_condition(liste_conditions *liste, char *condition)
+{
+    // Si la liste est vide
+    if (liste == NULL)
+    {
+        liste = (liste_conditions *)malloc(sizeof(liste_conditions));
+        if (liste == NULL)
+        {
+            printf("Erreur: Impossible d'allouer de la mémoire\n");
+            exit(1);
+        }
+        liste->name = (char *)malloc(strlen(condition) + 1);
+        if (liste->name == NULL) {
+            printf("Erreur: Impossible d'allouer de la mémoire\n");
+            exit(1);
+        }
+        strcpy(liste->name, condition);
+        liste->suivant = NULL;
+        return liste;
+    }
+
+    // Si la liste n'est pas vide, parcourir récursivement jusqu'à la fin
+    liste->suivant = ajout_condition(liste->suivant, condition);
+    return liste;
+}
+
+
+
+liste_regles * ajout_regle (liste_regles * liste, char * regle, liste_conditions * conditions)
+{
+    // Si la liste est vide
+    if (liste == NULL)
+    {
+        liste = (liste_regles *)malloc(sizeof(liste_regles));
+        if (liste == NULL)
+        {
+            printf("Erreur: Impossible d'allouer de la mémoire\n");
+            exit(1);
+        }
+        liste->name = (char *)malloc(strlen(regle) + 1);
+        if (liste->name == NULL) {
+            printf("Erreur: Impossible d'allouer de la mémoire\n");
+            exit(1);
+        }
+        strcpy(liste->name, regle);
+        liste->conditions = conditions;
+        liste->suivant = NULL;
+        return liste;
+    }
+
+    // Si la liste n'est pas vide, parcourir récursivement jusqu'à la fin
+    liste->suivant = ajout_regle(liste->suivant, regle, conditions);
+    return liste;
+}
+
+void affiche_liste_regle (liste_regles * liste)
+{
+    if (liste == NULL)
+    {
+        printf("Liste vide\n");
+        return;
+    }
+    liste_regles * tmp = liste;
+    while (tmp != NULL)
+    {
+        printf("%s\n", tmp->name);
+        affiche_liste_condition(tmp->conditions);
+        tmp = tmp->suivant;
+    }
+}
+
+void affiche_liste_condition (liste_conditions * liste)
+{
+    if (liste == NULL)
+    {
+        printf("Liste vide\n");
+        return;
+    }
+    liste_conditions * tmp = liste;
+    while (tmp != NULL)
+    {
+        printf("%s\n", tmp->name);
+        tmp = tmp->suivant;
+    }
+}
