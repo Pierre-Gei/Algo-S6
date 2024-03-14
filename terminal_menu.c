@@ -153,6 +153,7 @@ void menu(void){
                 }
                 char *temp_fait = malloc(TAILLE_MAX * sizeof(char));
                 liste_faits *faits_manquants = NULL;
+                affiche_faits_possibles(regles);
                 printf("Que voulez-vous vérifier \n");
                 scanf("%s", temp_fait);
                 if(chainage_arriere(temp_fait, regles, faits,faits_manquants))

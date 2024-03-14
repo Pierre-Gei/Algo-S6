@@ -2,7 +2,9 @@
 // Created by Pierre Geiguer on 12/03/2024.
 //
 
+
 #include <string.h>
+#include <stdbool.h>
 #include "traitement.h"
 #include "stdio.h"
 #include "stdlib.h"
@@ -192,3 +194,49 @@ void liberer_liste_regles(liste_regles **liste)
     *liste = NULL;
 }
 
+void affiche_faits_possibles(liste_regles *liste) {
+    liste_reponses *liste_reponses = NULL;
+
+    while (liste != NULL) {
+        // Check the rule's conditions
+        liste_conditions *conditions = liste->conditions;
+        while (conditions != NULL) {
+            if (conditions->name != NULL) {
+                if (!reponse_deja_donnee(liste_reponses, conditions->name)) {
+                    printf("Le fait %s est référencé\n", conditions->name);
+                    ajouter_reponse(&liste_reponses, conditions->name);
+                }
+            }
+            conditions = conditions->suivant;
+        }
+
+        // Check the rule's conclusion
+        if (liste->name != NULL) {
+            if (!reponse_deja_donnee(liste_reponses, liste->name)) {
+                printf("Le fait %s est référencé\n", liste->name);
+                ajouter_reponse(&liste_reponses, liste->name);
+            }
+        }
+
+        liste = liste->suivant;
+    }
+
+    liberer_liste_reponses(&liste_reponses);
+}
+
+bool reponse_deja_donnee(liste_reponses *liste, char *reponse) {
+    while (liste != NULL) {
+        if (strcmp(liste->name, reponse) == 0) {
+            return true;
+        }
+        liste = liste->suivant;
+    }
+    return false;
+}
+
+void ajouter_reponse(liste_reponses **liste, char *reponse) {
+    liste_reponses *nouvelle_reponse = malloc(sizeof(liste_reponses));
+    nouvelle_reponse->name = strdup(reponse);
+    nouvelle_reponse->suivant = *liste;
+    *liste = nouvelle_reponse;
+}

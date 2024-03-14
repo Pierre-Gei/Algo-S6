@@ -3,6 +3,7 @@
 //
 
 #include "structures.h"
+#include <stdbool.h>
 
 #ifndef ALGO_S6_TRAITEMENT_H
 #define ALGO_S6_TRAITEMENT_H
@@ -26,5 +27,17 @@ void liberer_liste_regles(liste_regles **liste);
 
 /*Libérer la mémoire d'une liste de réponses*/
 void  liberer_liste_reponses(liste_reponses **liste);
+
+/*Afficher une liste de réponses*/
+void affiche_faits_possibles(liste_regles *liste);
+
+/*Ajouter une réponse à une liste de réponses*/
+void ajouter_reponse(liste_reponses **liste, char *reponse);
+
+/*Vérifier si une réponse a déjà été donnée*/
+bool reponse_deja_donnee(liste_reponses *liste, char *reponse);
+
+
+
 
 #endif //ALGO_S6_TRAITEMENT_H
