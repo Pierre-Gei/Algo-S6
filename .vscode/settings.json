@@ -3,6 +3,7 @@
         "forward.h": "c",
         "structures.h": "c",
         "stdlib.h": "c",
-        "traitement.h": "c"
+        "traitement.h": "c",
+        "stdio.h": "c"
     }
 }

@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "structures.h"
+#include "traitement.h"
 #include "forward.h"
 
 liste_faits *ajout_fait(liste_faits *liste, char *fait)
@@ -159,23 +160,6 @@ int compare_liste_reponses(liste_reponses *liste1, liste_reponses *liste2)
     return compare_liste_reponses(liste1->suivant, liste2->suivant);
 }
 
-
-
-void affiche_liste_faits(liste_faits *liste)
-{
-    if (liste == NULL)
-    {
-        printf("La liste est vide\n");
-        return;
-    }
-    printf("Liste des faits:\n");
-    while (liste != NULL)
-    {
-        printf("%s\n", liste->fait);
-        liste = liste->suivant;
-    }
-}
-
 void affiche_liste_reponses(liste_reponses *liste)
 {
     if (liste == NULL)
@@ -190,45 +174,3 @@ void affiche_liste_reponses(liste_reponses *liste)
         liste = liste->suivant;
     }
 }
-
-void  liberer_liste_reponses(liste_reponses **liste)
-{
-    if (*liste == NULL)
-        return;
-    liberer_liste_reponses(&(*liste)->suivant);
-    free((*liste)->name);
-    free(*liste);
-    *liste = NULL;
-}
-
-void liberer_liste_faits(liste_faits **liste)
-{
-    if (*liste == NULL)
-        return;
-    liberer_liste_faits(&(*liste)->suivant);
-    free((*liste)->fait);
-    free(*liste);
-    *liste = NULL;
-}
-
-void liberer_liste_conditions(liste_conditions **liste)
-{
-    if (*liste == NULL)
-        return;
-    liberer_liste_conditions(&(*liste)->suivant);
-    free((*liste)->name);
-    free(*liste);
-    *liste = NULL;
-}
-
-void liberer_liste_regles(liste_regles **liste)
-{
-    if (*liste == NULL)
-        return;
-    liberer_liste_regles(&(*liste)->suivant);
-    liberer_liste_conditions(&(*liste)->conditions);
-    free((*liste)->name);
-    free(*liste);
-    *liste = NULL;
-}
-
