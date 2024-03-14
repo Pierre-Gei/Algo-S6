@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g
-DEPS = backwards.h forward.h structures.h traitement.h save.h
-OBJ = main.o backwards.o forward.o traitement.o save.o
+DEPS = backwards.h forward.h structures.h traitement.h save.h menu_terminal.h
+OBJ = main.o backwards.o forward.o traitement.o save.o menu_terminal.o
 
 all: compile
 

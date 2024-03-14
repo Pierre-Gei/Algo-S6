@@ -16,5 +16,7 @@
 
 void load_to_list(char *filename, liste_regles **liste);
 void load_faits_to_list(char *filename, liste_faits **liste);
-void load_faits_to_list_recursive(FILE *file, liste_faits **liste);
+void divide_and_add_faits(liste_faits **liste, char *faits, char * filename);
+void ajoute_fait_fichier(char *filename, char *fait);
+void ajoute_regle_fichier(char *filename, char *regle);
 #endif //ALGO_S6_SAVE_H

@@ -191,4 +191,3 @@ void affiche_liste_reponses(liste_reponses *liste)
         liste = liste->suivant;
     }
 }
-
