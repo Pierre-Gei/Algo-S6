@@ -2,7 +2,13 @@
 // Created by Pierre Geiguer on 12/03/2024.
 //
 
-#include "save.h"
+#include <string.h>
+#include <ctype.h>
+#include "../include/save.h"
+#include "stdio.h"
+#include "stdlib.h"
+#include "../include/structures.h"
+#include "../include/traitement.h"
 
 void load_to_list(char *filename, liste_regles **liste)
 {

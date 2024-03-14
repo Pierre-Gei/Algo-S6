@@ -1,5 +1,8 @@
 // Veuillez reporter tout commentaire a ghislain.oudinet@isen.fr
 
+//	Version 3.3 (22/06/2022) : ajout du renvoi de l'ancienne épaisseur par epaisseurDeTrait()
+//								ajout du support du bouton du milieu ainsi que du scroll
+//
 //	Version 3.2 (16/09/2016) : remplacement de demandeAnimation_ips() par un demandeTemporisation() plus générique (qui envoie le message Temporisation)
 //		Ajout de la fonction termineBoucleEvenements(), necessaire dorenavant sous FreeGLUT sous Linux pour faire quelques nettoyages avant fin du programme
 //		Les actions sur le clavier ne memorisent plus les coordonnees de la souris (a moins de recompiler en activant ACTION_CLAVIER_MEMORISE_POSITION_SOURIS)
@@ -71,7 +74,7 @@
 //	#include <OpenGL/CGLMacro.h>
 	#include <GLUT/glut.h>		// Header File For The GLut Library
 #else
-	#include <glut.h>			// Header File For The GLut Library
+	#include <GL/glut.h>			// Header File For The GLut Library
 	#ifdef _WIN32
 		#include <GL/glext.h>
 	#else
@@ -83,8 +86,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "GfxLib.h"
-#include "ESLib.h" // Pour tempsReel
+#include "../include/GfxLib.h"
+#include "../include/ESLib.h" // Pour tempsReel
 
 //#define DEBUG_MODE
 
@@ -300,12 +303,15 @@ void couleurCourante(int rouge, int vert, int bleu)
 	glColor3f(rouge/255.f, vert/255.f, bleu/255.f);
 }
 
-/* Definit l'epaisseur de trait EN PIXELS DE LA FENETRE servant a afficher les points et les lignes */
-void epaisseurDeTrait(float epaisseur)
+// Définit l'épaisseur de trait EN PIXELS DE LA FENETRE servant a afficher les points et les lignes
+// Renvoie la dernière épaisseur de trait utilisée
+float epaisseurDeTrait(float epaisseur)
 {
+	const float ancienneEpaisseur = sEpaisseurDeTrait;
 	sEpaisseurDeTrait = epaisseur;
 	glPointSize(epaisseur);
 	glLineWidth(epaisseur);
+	return ancienneEpaisseur;
 }
 
 /* Dessine un point de couleur courante aux coordonnees donnees */
@@ -432,42 +438,32 @@ static unsigned char bleuDuPixel(int pixel)
 /* Lis une portion de la fenetre, couvrant largeur*hauteur et demarrant en (x, y)
 Les donnees lues sont sauvees comme une succession de valeurs B, V, R de type
 unsigned char */
-void lisImage(int x, int y, int largeur, int hauteur, unsigned char *donnees)
-{
+void lisImage(int x, int y, int largeur, int hauteur, unsigned char *donnees) {
 	unsigned char *ptrDonnees;
 	int *pixels = (int*)malloc(largeur*hauteur*sizeof(int));
 	int *ptrPixel;
 	int index;
-	
 	glReadPixels(x, y, largeur, hauteur, GL_BGRA, GL_UNSIGNED_INT_8_8_8_8_REV, pixels);
-
 	ptrPixel = pixels;
 	ptrDonnees = donnees;
-	for
-		(index = largeur*hauteur; index != 0; --index) /* On parcourt tous les pixels lus */
-	{
-		int pixel = *ptrPixel; /* On lit le pixel courant */
-		
-		/* On extrait chaque composante du pixel, qu'on met dans les donnees */
+	for (index = largeur*hauteur; index != 0; --index) { // On parcourt tous les pixels lus
+		int pixel = *ptrPixel;					// On lit le pixel courant
+		// On extrait chaque composante du pixel, que l'on met dans les donnees
 		ptrDonnees[0] = bleuDuPixel(pixel);
 		ptrDonnees[1] = vertDuPixel(pixel);
 		ptrDonnees[2] = rougeDuPixel(pixel);
-		
-		++ptrPixel; /* On passe au pixel suivant */
-		ptrDonnees += 3; /* On passe aux donnees suivantes */		
+		++ptrPixel;								// On passe au pixel suivant
+		ptrDonnees += 3;						// On passe aux donnees suivantes		
 	}
-	
 	free(pixels);
 }
 
 // Convertit largeur*hauteur pixels de la forme bleu, vert, rouge en entiers opacite, rouge, vert, bleu little endian
-static int *BVR2ARVB(int largeur, int hauteur, const unsigned char *donnees)
-{
+static int *BVR2ARVB(int largeur, int hauteur, const unsigned char *donnees) {
 	const unsigned char *ptrDonnees;
 	unsigned char *pixels = (unsigned char*)malloc(largeur*hauteur*sizeof(int));
 	unsigned char *ptrPixel;
 	int index;
-	
 	ptrPixel = pixels;
 	ptrDonnees = donnees;
 	for
@@ -801,30 +797,42 @@ static void fonctionClavierSpecial(int codeTouche, int xSouris, int ySouris)
 /* Fonction callback par defaut appelee lors d'un clic de bouton souris */
 static void fonctionBoutonsSouris(int bouton, int etat, int xSouris, int ySouris)
 {
-	/* Si l'evenement concerne le bouton de gauche */
-	if
-		(bouton == GLUT_LEFT_BUTTON)
+	switch (bouton)
 	{
-		/* On memorise s'il a ete appuye ou relache */
-		sEtatBoutonSouris = (etat == GLUT_DOWN ? GaucheAppuye : GaucheRelache);
-	}
-	else if /* Si l'evenement concerne le bouton de droite */
-		(bouton == GLUT_RIGHT_BUTTON)
-	{
-		/* On memorise s'il a ete appuye ou relache */
-		sEtatBoutonSouris = (etat == GLUT_DOWN ? DroiteAppuye : DroiteRelache);
+		case GLUT_LEFT_BUTTON:
+			sEtatBoutonSouris = (etat == GLUT_DOWN ? GaucheAppuye : GaucheRelache);
+			break;
+		case GLUT_RIGHT_BUTTON:
+			sEtatBoutonSouris = (etat == GLUT_DOWN ? DroiteAppuye : DroiteRelache);
+			break;
+		case GLUT_MIDDLE_BUTTON:
+			sEtatBoutonSouris = (etat == GLUT_DOWN ? MilieuAppuye : MilieuRelache);
+			break;
+		case 3:
+			sEtatBoutonSouris = ScrollDown;
+			break;
+		case 4:
+			sEtatBoutonSouris = ScrollUp;
+			break;
+		case 5:
+			sEtatBoutonSouris = ScrollRight;
+			break;
+		case 6:
+			sEtatBoutonSouris = ScrollLeft;
+			break;
+		default:
+			sEtatBoutonSouris = bouton;
 	}
 
 //	On memorise l'etat des modificateurs Shift, Ctrl et Alt
 //	sAppuiToucheShift = (glutGetModifiers ()&GLUT_ACTIVE_SHIFT) != 0;
 //	sAppuiToucheCtrl = (glutGetModifiers ()&GLUT_ACTIVE_CTRL) != 0;
 //	sAppuiToucheAlt = (glutGetModifiers ()&GLUT_ACTIVE_ALT) != 0;
-
-	/* On memorise les coordonnees graphiques (et pas fenetre) de la souris au moment de l'evenement */
+// 	On memorise les coordonnees graphiques (et pas fenetre) de la souris au moment de l'evenement
 	sAbscisseSouris = xSouris;
 	sOrdonneeSouris = sHauteurFenetre-ySouris;
 
-	/* Puis on appelle la fonction generique de gestion des evenements */
+// 	Puis on appelle la fonction generique de gestion des evenements
 	gestionEvenement(BoutonSouris);
 }
 

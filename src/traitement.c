@@ -3,10 +3,10 @@
 //
 
 #include <string.h>
-#include "traitement.h"
+#include "../include/traitement.h"
 #include "stdio.h"
 #include "stdlib.h"
-#include "structures.h"
+#include "../include/structures.h"
 
 void add_regle(liste_regles **liste, char *name, liste_conditions *conditions)
 {

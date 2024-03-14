@@ -47,8 +47,8 @@
 #else
 #include <sys/time.h>
 #endif
-#include "ErreurLib.h"
-#include "ESLib.h"
+#include "../include/ErreurLib.h"
+#include "../include/ESLib.h"
 
 /* La variable permettant de controler le nombre de chiffres a afficher
    apres la virgule pour un nombre en virgule flottante */

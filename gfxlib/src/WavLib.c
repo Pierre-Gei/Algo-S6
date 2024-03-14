@@ -5,8 +5,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "WavLib.h"
-#include "OutilsLib.h"
+#include "../include/WavLib.h"
+#include "../include/OutilsLib.h"
 
 #ifndef NULL
 #define NULL ((void*)0)
