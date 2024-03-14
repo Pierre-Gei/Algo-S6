@@ -23,9 +23,6 @@ Vérifier chaque condition avec tous les faits
 */
 int verifier_conditions(liste_faits *faits, liste_conditions *conditions);
 
-/*Afficher tous les faits*/
-void affiche_liste_faits( liste_faits * liste);
-
 /*Afficher toutes les réponses*/
 void affiche_liste_reponses( liste_reponses * liste);
 

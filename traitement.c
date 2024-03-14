@@ -81,6 +81,7 @@ void add_condition_to_regle(liste_regles **liste, char *name_regle, char *name_c
 
 void print_liste_regles(liste_regles *liste) /////////// RENDRE RECURSIF
 {
+    printf("Printing list of rules:\n");
     if (liste == NULL)
     {
         printf("List is empty.\n");
@@ -133,23 +134,18 @@ void add_fait(liste_faits **liste, char *fait)
     }
 }
 
-
-void print_liste_faits(liste_faits *liste)
+void affiche_liste_faits(liste_faits *liste)
 {
-    printf("Printing list of facts:\n");
     if (liste == NULL)
     {
-        printf("List is empty.\n");
+        printf("La liste est vide\n");
         return;
     }
-    liste_faits *tmp = liste;
-    while (tmp != NULL)
+    printf("Liste des faits:\n");
+    while (liste != NULL)
     {
-        if (tmp->fait != NULL)
-        {
-            printf("%s;\n", tmp->fait);
-        }
-        tmp = tmp->suivant;
+        printf("%s\n", liste->fait);
+        liste = liste->suivant;
     }
 }
 

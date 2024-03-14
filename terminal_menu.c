@@ -9,6 +9,13 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include "structures.h"
+#include "forward.h"
+#include "save.h"
+#include "backwards.h"
+#include "traitement.h"
+
+
 
 // ANSI color codes
 #define COLOR_WHITE  "\x1b[38;5;255m"
@@ -29,6 +36,13 @@
 void menu(void){
     int choice;
     bool quit = false;
+    char *but = "pain_au_chocolat";
+    liste_regles *liste = NULL;
+    load_to_list("regles.kbs", &liste);
+    liste_faits *faits = NULL;
+    liste_faits *faits_manquants = NULL;
+    load_faits_to_list("faits.kbs", &faits);
+    liste_reponses *reponses = NULL;
     do{
         printf(COLOR_WHITE BG"╔═════════════════════════════════════════════════════════════════════════════════════════════════════╗\n"
                "║                                                                                                     ║\n"
@@ -80,17 +94,24 @@ void menu(void){
             case 3:
                 system("clear");
                 printf("Affichage des faits et règles actuelles\n");
-                //TODO: Implement the display of the facts and rules
+                affiche_liste_faits(faits);
+                printf("\n");
+                print_liste_regles(liste);
                 break;
             case 4:
                 system("clear");
                 printf("Chaînage avant\n");
-                //TODO: Implement the forward chaining
+                parcours(faits, liste, &reponses);
+                affiche_liste_reponses(reponses);
                 break;
             case 5:
                 system("clear");
                 printf("Chaînage arrière\n");
-                //TODO: Implement the backward chaining
+                if(chainage_arriere(but, liste, faits, faits_manquants) == true){
+                    printf("On peut atteindre %s \n", but);
+                } else {
+                    printf("On ne peut pas atteindre %s \n", but);
+                }
                 break;
             case 6:
                 system("clear");
@@ -100,4 +121,8 @@ void menu(void){
         }
         choice = 0;
     } while(quit == false);
+    printf(COLOR_RESET"\n");
+    liberer_liste_faits(&faits);
+    liberer_liste_faits(&faits_manquants);
+    liberer_liste_regles(&liste);
 }

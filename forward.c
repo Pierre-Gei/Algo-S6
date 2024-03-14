@@ -160,23 +160,6 @@ int compare_liste_reponses(liste_reponses *liste1, liste_reponses *liste2)
     return compare_liste_reponses(liste1->suivant, liste2->suivant);
 }
 
-
-
-void affiche_liste_faits(liste_faits *liste)
-{
-    if (liste == NULL)
-    {
-        printf("La liste est vide\n");
-        return;
-    }
-    printf("Liste des faits:\n");
-    while (liste != NULL)
-    {
-        printf("%s\n", liste->fait);
-        liste = liste->suivant;
-    }
-}
-
 void affiche_liste_reponses(liste_reponses *liste)
 {
     if (liste == NULL)
