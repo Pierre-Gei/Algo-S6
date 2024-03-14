@@ -10,6 +10,8 @@
 #include "traitement.h"
 #include "backwards.h"
 #include "terminal_menu.h"
+#define COLOR_RESET   "\x1b[0m"
+
 
 int main(void){
     menu();
@@ -29,5 +31,6 @@ int main(void){
     free_liste_faits(faits_manquants);
     free_liste_regles(liste);
     free_liste_faits(faits);
+    printf(COLOR_RESET);
     return 0;
 }
