@@ -133,12 +133,17 @@ void add_fait(liste_faits **liste, char *fait)
     }
 }
 
+<<<<<<< HEAD
 
 void print_liste_faits(liste_faits *liste)
 {
     printf("Printing list of facts:\n");
     if (liste == NULL)
     {
+=======
+void print_liste_faits(liste_faits *liste){
+    if(liste == NULL){
+>>>>>>> 7062c6814f217e61e381e264626f00df74e95b23
         printf("List is empty.\n");
         return;
     }
