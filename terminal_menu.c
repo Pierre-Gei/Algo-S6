@@ -14,7 +14,8 @@
 #include "save.h"
 #include "backwards.h"
 #include "traitement.h"
-
+#include "terminal_menu.h"
+#define TAILLE_MAX 256
 
 
 // ANSI color codes
@@ -36,13 +37,10 @@
 void menu(void){
     int choice;
     bool quit = false;
-    char *but = "pain_au_chocolat";
-    liste_regles *liste = NULL;
-    load_to_list("regles.kbs", &liste);
+    char *nom_base_regles = malloc(TAILLE_MAX * sizeof(char));
+    char *nom_base_faits = malloc(TAILLE_MAX * sizeof(char));
+    liste_regles * regles = NULL;
     liste_faits *faits = NULL;
-    liste_faits *faits_manquants = NULL;
-    load_faits_to_list("faits.kbs", &faits);
-    liste_reponses *reponses = NULL;
     do{
         printf(COLOR_WHITE BG"╔═════════════════════════════════════════════════════════════════════════════════════════════════════╗\n"
                "║                                                                                                     ║\n"
@@ -69,12 +67,14 @@ void menu(void){
                "║                                                                                                     ║\n"
                "╠═════════════════════════════════════════════════════════════════════════════════════════════════════╣\n"
                "║                                                                                                     ║\n"
-               "║    "COLOR_RED"1."COLOR_WHITE" Saisie de règles                                                                              ║\n"
-               "║    "COLOR_YELLOW"2."COLOR_WHITE" Saisie de faits                                                                               ║\n"
-               "║    "COLOR_GREEN"3."COLOR_WHITE" Affichage des faits et règles actuelles                                                       ║\n"
-               "║    "COLOR_MAGENTA"4."COLOR_WHITE" Chaînage avant                                                                                ║\n"
-               "║    "COLOR_BLUE"5."COLOR_WHITE" Chaînage arrière                                                                              ║\n"
-               "║    "COLOR_BLACK"6."COLOR_WHITE" Quitter                                                                                       ║\n"
+               "║    "COLOR_RED"1."COLOR_WHITE" Choisir une base de règles                                                                    ║\n"
+               "║    "COLOR_YELLOW"2."COLOR_WHITE" Choisir une base de faits                                                                     ║\n"
+               "║    "COLOR_CYAN"3."COLOR_WHITE" Ajouter des faits à la base de faits                                                          ║\n"
+               "║    "COLOR_MAGENTA"4."COLOR_WHITE" Ajouter des règles à la base de règles                                                        ║\n"
+               "║    "COLOR_GREEN"5."COLOR_WHITE" Affichage des faits et règles actuelles                                                       ║\n"
+               "║    "COLOR_MAGENTA"6."COLOR_WHITE" Chaînage avant                                                                                ║\n"
+               "║    "COLOR_BLUE"7."COLOR_WHITE" Chaînage arrière                                                                              ║\n"
+               "║    "COLOR_BLACK"8."COLOR_WHITE" Quitter                                                                                       ║\n"
                "║                                                                                                     ║\n"
                "╚═════════════════════════════════════════════════════════════════════════════════════════════════════╝\n"
                "\n"
@@ -84,45 +84,106 @@ void menu(void){
             case 1:
                 system("clear");
                 printf("Saisie de règles\n");
-                //TODO: Implement the rules input
+                printf("Choisir une base de règles (nom.extension) :\n");
+                scanf("%s", nom_base_regles);
+                load_to_list(nom_base_regles, &regles);
+                break;
                 break;
             case 2:
                 system("clear");
                 printf("Saisie de faits\n");
-                //TODO: Implement the facts input
+                system("clear");
+                printf("Choisir une base de faits (nom.extension) :\n");
+                scanf("%s", nom_base_faits);
+                load_faits_to_list(nom_base_faits, &faits);
                 break;
             case 3:
+                system("clear");
+                if (nom_base_faits == NULL)
+                {
+                    printf("Veuillez choisir une base de faits avant d'ajouter des faits\n");
+                    break;
+                }
+                char * fait = malloc(TAILLE_MAX * sizeof(char));
+                printf("Ajouter des faits à la base de faits :\n ex : fait1 fait2 fait3\n");
+                clear_buffer();
+                fgets(fait, TAILLE_MAX, stdin);
+                divide_and_add_faits(&faits, fait, nom_base_faits);
+                free(fait);
+                break;
+            case 4:
+                system("clear");
+                if (nom_base_regles == NULL)
+                {
+                    printf("Veuillez choisir une base de règles avant d'ajouter des règles\n");
+                    break;
+                }
+                printf("Ajouter des règles à la base de règles : \n ex : fait1 fait2 -> fait3\n");
+                char *regle = malloc(TAILLE_MAX * sizeof(char));
+                clear_buffer();
+                fgets(regle, TAILLE_MAX, stdin);
+                ajoute_regle_fichier(nom_base_regles, regle);
+                break;
+            case 5:
                 system("clear");
                 printf("Affichage des faits et règles actuelles\n");
                 affiche_liste_faits(faits);
                 printf("\n");
-                print_liste_regles(liste);
-                break;
-            case 4:
-                system("clear");
-                printf("Chaînage avant\n");
-                parcours(faits, liste, &reponses);
-                affiche_liste_reponses(reponses);
-                break;
-            case 5:
-                system("clear");
-                printf("Chaînage arrière\n");
-                if(chainage_arriere(but, liste, faits, faits_manquants) == true){
-                    printf("On peut atteindre %s \n", but);
-                } else {
-                    printf("On ne peut pas atteindre %s \n", but);
-                }
+                print_liste_regles(regles);
                 break;
             case 6:
                 system("clear");
-                printf("Quitter\n");
+                if (faits == NULL || regles == NULL)
+                {
+                    printf("Veuillez choisir une base de faits et une base de règles avant de continuer\n");
+                    break;
+                }
+                liste_reponses *reponses = NULL;
+                printf("Règles atteintes d'après la base de faits \n");
+                parcours(faits, regles, &reponses);
+                affiche_liste_reponses(reponses);
+                liberer_liste_reponses(&reponses);
+                break;
+            case 7:
+                system("clear");
+                if (faits == NULL || regles == NULL)
+                {
+                    printf("Veuillez choisir une base de faits et une base de règles avant de continuer\n");
+                    break;
+                }
+                char *temp_fait = malloc(TAILLE_MAX * sizeof(char));
+                liste_faits *faits_manquants = NULL;
+                printf("Que voulez-vous vérifier \n");
+                scanf("%s", temp_fait);
+                if(chainage_arriere(temp_fait, regles, faits,faits_manquants))
+                {
+                    printf("Le fait %s est atteint \n", temp_fait);
+                }
+                else
+                {
+                    printf("Le fait %s n'est pas atteint \n", temp_fait);
+                }
+                free(temp_fait);
+
+                break;
+            case 8:
+                system("clear");
+                printf("Au revoir \n");
+                liberer_liste_faits(&faits);
+                liberer_liste_regles(&regles);
+                free(nom_base_faits);
+                free(nom_base_regles);
                 quit = true;
                 continue;
         }
         choice = 0;
     } while(quit == false);
     printf(COLOR_RESET"\n");
-    liberer_liste_faits(&faits);
-    liberer_liste_faits(&faits_manquants);
-    liberer_liste_regles(&liste);
+}
+
+void clear_buffer() {
+    int c = getchar();
+    if (c != '\n' && c != EOF) {
+        clear_buffer(); // Appel récursif
+    }
 }

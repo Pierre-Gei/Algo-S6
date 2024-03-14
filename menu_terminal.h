@@ -4,3 +4,4 @@
 
 
 void menu();
+void clear_buffer();
