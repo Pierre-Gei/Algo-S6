@@ -18,7 +18,7 @@
 #include <winsock.h>
 #endif
 
-#include "SocketLib.h"
+#include "../include/SocketLib.h"
 
 // Cree une nouvelle connexion qui pourra ensuite etre branchee sur une adresse et un port particulier
 int nouvelleConnexion(void)

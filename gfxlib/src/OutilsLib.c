@@ -1,4 +1,4 @@
-#include "OutilsLib.h"
+#include "../include/OutilsLib.h"
 #include <stdbool.h>
 
 // Cette fonction teste si l'architecture est big endian

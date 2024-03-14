@@ -3,10 +3,10 @@
 //
 
 #include <string.h>
-#include "traitement.h"
+#include "../include/traitement.h"
 #include "stdio.h"
 #include "stdlib.h"
-#include "structures.h"
+#include "../include/structures.h"
 
 liste_regles *init_liste_regles(){
     liste_regles *liste = malloc(sizeof(liste_regles));

@@ -7,7 +7,7 @@
  *
  */
 
-#include "VectorLib.h"
+#include "../include/VectorLib.h"
 
 #ifdef __SSE2__
 

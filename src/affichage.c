@@ -1,9 +1,9 @@
 #include <stdlib.h> // Pour pouvoir utiliser exit()
 #include <stdio.h> // Pour pouvoir utiliser printf()
 #include <math.h> // Pour pouvoir utiliser sin() et cos()
-#include "GfxLib.h" // Seul cet include est necessaire pour faire du graphique
-#include "BmpLib.h" // Cet include permet de manipuler des fichiers BMP
-#include "ESLib.h" // Pour utiliser valeurAleatoire()
+#include "../gfxlib/include/GfxLib.h" // Seul cet include est necessaire pour faire du graphique
+#include "../gfxlib/include/BmpLib.h" // Cet include permet de manipuler des fichiers BMP
+#include "../gfxlib/include/ESLib.h" // Pour utiliser valeurAleatoire()
 
 // Largeur et hauteur par defaut d'une image correspondant a nos criteres
 #define LargeurFenetre 800
@@ -17,11 +17,11 @@ void gestionEvenement(EvenementGfx evenement);
 
 
 
-int main(int argc, char **argv)
+int affiche(int argc, char **argv)
 {
 	initialiseGfx(argc, argv);
 	
-	prepareFenetreGraphique("GfxLib", LargeurFenetre, HauteurFenetre);
+	prepareFenetreGraphique("OpenGL", LargeurFenetre, HauteurFenetre);
 	
 	/* Lance la boucle qui aiguille les evenements sur la fonction gestionEvenement ci-apres,
 		qui elle-meme utilise fonctionAffichage ci-dessous */
@@ -69,7 +69,8 @@ void gestionEvenement(EvenementGfx evenement)
 		case Initialisation:
 			xBalle = largeurFenetre()*valeurAleatoire();
 			yBalle = hauteurFenetre()*valeurAleatoire();
-			image = lisBMPRGB("ISEN.bmp");
+			image = lisBMPRGB("Image/mamie.bmp");
+
 			/* Le message "Initialisation" est envoye une seule fois, au debut du
 			programme : il permet de fixer "image" a la valeur qu'il devra conserver
 			jusqu'a la fin du programme : soit "image" reste a NULL si l'image n'a
@@ -107,18 +108,16 @@ void gestionEvenement(EvenementGfx evenement)
 			ligne(0, 0, (largeurFenetre()-600)/2, (hauteurFenetre()-400)/2);
 
 			// Affichage d'un rectangle "saumon"
+/*
 			couleurCourante(255, 128, 128);
 			rectangle((largeurFenetre()-600)/2, (hauteurFenetre()-400)/2, (largeurFenetre()-600)/2+600, (hauteurFenetre()-400)/2+400);
-
+*/
 			// Affichage d'un texte vert sombre avec ombrage en police de taille 20
 			// L'effet d'ombrage vient tout simplement du dessin du texte en gris clair
 			// sous le texte voulu, avec un léger décalage
-			couleurCourante(210, 210, 210);
+			couleurCourante(55, 250, 34);
 			epaisseurDeTrait(3);
-			afficheChaine("L'algo c'est rigolo", 20, 77, 13);
-			couleurCourante(0, 128, 0);
-			epaisseurDeTrait(2);
-			afficheChaine("L'algo c'est rigolo", 20, 75, 15);
+			afficheChaine("Les recettes de Mamie", 50, 275, 550);
 
 			// Affichage d'une image
 			if (image != NULL) // Si l'image a pu etre lue
@@ -180,17 +179,38 @@ void gestionEvenement(EvenementGfx evenement)
 			break;
 
 		case BoutonSouris:
-			if (etatBoutonSouris() == GaucheAppuye)
+			switch (etatBoutonSouris())
 			{
-				printf("Bouton gauche appuye en : (%d, %d)\n", abscisseSouris(), ordonneeSouris());
-				// Si le bouton gauche de la souris est appuye, faire repartir
-				// la balle de la souris
-				xBalle = abscisseSouris();
-				yBalle = ordonneeSouris();
-			}
-			else if (etatBoutonSouris() == GaucheRelache)
-			{
-				printf("Bouton gauche relache en : (%d, %d)\n", abscisseSouris(), ordonneeSouris());
+				case GaucheAppuye:
+					printf("Bouton gauche appuye en : (%d, %d)\n", abscisseSouris(), ordonneeSouris());
+					// Si le bouton gauche de la souris est appuye, faire repartir
+					// la balle de la souris
+					xBalle = abscisseSouris();
+					yBalle = ordonneeSouris();
+					break;
+				case GaucheRelache:
+					printf("Bouton gauche relache en : (%d, %d)\n", abscisseSouris(), ordonneeSouris());
+					break;
+				case DroiteAppuye:
+				case DroiteRelache:
+					puts("Bouton droite");
+					break;
+				case MilieuAppuye:
+				case MilieuRelache:
+					puts("Bouton milieu");
+					break;
+				case ScrollDown:
+					puts("Scroll down");
+					break;
+				case ScrollUp:
+					puts("Scroll up");
+					break;
+				case ScrollRight:
+					puts("Scroll right");
+					break;
+				case ScrollLeft:
+					puts("Scroll left");
+					break;
 			}
 			break;
 		

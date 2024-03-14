@@ -5,10 +5,10 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "stdbool.h"
-#include "structures.h"
-#include "save.h"
-#include "traitement.h"
-#include "backwards.h"
+#include "../include/structures.h"
+#include "../include/save.h"
+#include "../include/traitement.h"
+#include "../include/backwards.h"
 
 int main(void){
     char *but = "pain_au_chocolat";

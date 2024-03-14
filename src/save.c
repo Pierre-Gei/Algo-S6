@@ -4,11 +4,11 @@
 
 #include <string.h>
 #include <ctype.h>
-#include "save.h"
+#include "../include/save.h"
 #include "stdio.h"
 #include "stdlib.h"
-#include "structures.h"
-#include "traitement.h"
+#include "../include/structures.h"
+#include "../include/traitement.h"
 
 void load_to_list(char *filename, liste_regles *liste){
     FILE *file = fopen(filename, "r");

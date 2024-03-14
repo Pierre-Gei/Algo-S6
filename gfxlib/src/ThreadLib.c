@@ -7,7 +7,7 @@
  *
  */
 
-#include "ThreadLib.h"
+#include "../include/ThreadLib.h"
 
 #ifndef _WIN32
 
