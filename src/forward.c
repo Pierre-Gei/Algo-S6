@@ -2,11 +2,12 @@
 // Created by Pierre Geiguer on 11/03/2024.
 //
 
+#include "../include/forward.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "structures.h"
 #include "traitement.h"
+#include "structures.h"
 #include "forward.h"
 
 liste_faits *ajout_fait(liste_faits *liste, char *fait)

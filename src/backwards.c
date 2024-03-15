@@ -1,11 +1,11 @@
 #include <stdbool.h>
 #include <string.h>
-#include "backwards.h"
+#include "../include/backwards.h"
 #include "stdio.h"
 #include "stdlib.h"
-#include "structures.h"
-#include "save.h"
-#include "traitement.h"
+#include "../include/structures.h"
+#include "../include/save.h"
+#include "../include/traitement.h"
 
 bool chainage_arriere(char *But, liste_regles *Base_de_regles, liste_faits *Base_de_faits, liste_faits *Base_de_faits_manquants){
     if(fait_exists(Base_de_faits, But)){
