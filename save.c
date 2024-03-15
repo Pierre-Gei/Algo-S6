@@ -89,13 +89,13 @@ void load_faits_to_list(char *filename, liste_faits **liste)
         printf("Fichier inconnu \n");
         return;
     }
-    l/* `divide_and_add_faits` est une fonction qui prend une chaîne de faits (`faits`), la divise en
+    load_faits_to_list_recursive(file, liste);
+}
+
+/* `divide_and_add_faits` est une fonction qui prend une chaîne de faits (`faits`), la divise en
     faits individuels en utilisant l'espace comme délimiteur, ajoute chaque fait individuel à une
     liste chaînée de faits pointée par `liste`, et ajoute également chaque fait vers un fichier
     spécifié par `filename` à l'aide de la fonction `ajoute_fait_fichier`. */
-    oad_faits_to_list_recursive(file, liste);
-}
-
 void divide_and_add_faits(liste_faits **liste, char *faits, char *filename)
 {
     char *fait = strtok(faits, " ");
