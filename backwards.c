@@ -11,7 +11,7 @@
  * La fonction "chainage_arriere" vérifie si un objectif peut être atteint par chaînage arrière en
  * utilisant un ensemble de règles et de faits.
  * 
- * @param But Le paramètre « Mais » est un pointeur vers un tableau de caractères, qui représente
+ * @param But Le paramètre «But» est un pointeur vers un tableau de caractères, qui représente
  * probablement le but ou la cible que nous essayons d'atteindre dans l'algorithme de chaînage arrière.
  * Il peut s'agir d'un fait ou d'une déclaration spécifique que nous essayons de prouver ou de déduire
  * en utilisant les règles et les faits disponibles dans la base de connaissances.
