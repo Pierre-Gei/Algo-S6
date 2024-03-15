@@ -1,10 +1,6 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Starter Kit",
-  "logo": {
-    "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg"
-  },
+  "name": "Pokédaine Industries",
   "favicon": "/favicon.svg",
   "colors": {
     "primary": "#0D9373",
@@ -23,6 +19,13 @@
         "get-started/installation",
         "get-started/usage"
       ]
+    },
+    {
+      "group": "Structures de données",
+        "pages": [
+            "data-structures/introduction",
+            "data-structures/structures"
+        ]
     }
   ],
   "footerSocials": {

@@ -1,0 +1,38 @@
+---
+title: Detail
+---
+
+## Structures de Données
+
+Dans notre application, nous utilisons plusieurs structures de données pour gérer les règles, les conditions, les faits et les réponses. Voici une description de chaque structure :
+
+### Liste des Règles (`liste_regles`)
+
+Cette structure représente une liste chaînée de règles. Chaque élément de la liste contient :
+
+- `name` : Le nom de la règle.
+- `conditions` : Une liste chaînée des conditions de la règle.
+- `suivant` : Un pointeur vers la règle suivante dans la liste.
+
+### Liste des Conditions (`liste_conditions`)
+
+Cette structure représente une liste chaînée de conditions. Chaque élément de la liste contient :
+
+- `name` : Le nom de la condition.
+- `suivant` : Un pointeur vers la condition suivante dans la liste.
+
+### Liste des Faits (`liste_faits`)
+
+Cette structure représente une liste chaînée de faits. Chaque élément de la liste contient :
+
+- `fait` : Le fait lui-même.
+- `suivant` : Un pointeur vers le fait suivant dans la liste.
+
+### Liste des Réponses (`liste_reponses`)
+
+Cette structure représente une liste chaînée de réponses. Chaque élément de la liste contient :
+
+- `name` : Le nom de la réponse.
+- `suivant` : Un pointeur vers la réponse suivante dans la liste.
+
+Ces structures de données sont essentielles pour le fonctionnement de notre application. Elles permettent de stocker et de manipuler les règles, les conditions, les faits et les réponses de manière efficace.
