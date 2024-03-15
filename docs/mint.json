@@ -32,7 +32,8 @@
       "pages": [
         "functions/introduction",
         "functions/main",
-        "functions/terminal_menu"
+        "functions/terminal_menu",
+        "functions/backwards"
       ]
     }
   ],
