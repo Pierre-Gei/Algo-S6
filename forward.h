@@ -58,5 +58,7 @@ Eviter les doublons dans une liste de faits
 */
 int doublon_fait (liste_faits *liste, char *fait);
 
+void printf_recursive(liste_reponses *liste) ;
+
 
 #endif //ALGO_S6_FORWARD_H

@@ -160,17 +160,23 @@ int compare_liste_reponses(liste_reponses *liste1, liste_reponses *liste2)
     return compare_liste_reponses(liste1->suivant, liste2->suivant);
 }
 
-void affiche_liste_reponses(liste_reponses *liste)
+void affiche_liste_reponses(liste_reponses *liste) 
 {
-    if (liste == NULL)
+    if (liste == NULL) 
     {
         printf("La liste est vide\n");
         return;
     }
     printf("Liste des réponses:\n");
-    while (liste != NULL)
+    printf_recursive(liste);
+}
+
+void printf_recursive(liste_reponses *liste) 
+{
+    if (liste == NULL) 
     {
-        printf("%s\n", liste->name);
-        liste = liste->suivant;
+        return;
     }
+    printf("%s\n", liste->name);
+    printf_recursive(liste->suivant);
 }

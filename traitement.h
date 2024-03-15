@@ -40,4 +40,5 @@ bool reponse_deja_donnee(liste_reponses *liste, char *reponse);
 
 
 
+
 #endif //ALGO_S6_TRAITEMENT_H
