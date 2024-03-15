@@ -196,14 +196,14 @@ void liberer_liste_regles(liste_regles **liste)
 
 void affiche_faits_possibles(liste_regles *liste) {
     liste_reponses *liste_reponses = NULL;
+    printf("Liste des faits possibles d'après la base de faits : \n");
 
     while (liste != NULL) {
-        // Check the rule's conditions
         liste_conditions *conditions = liste->conditions;
         while (conditions != NULL) {
             if (conditions->name != NULL) {
                 if (!reponse_deja_donnee(liste_reponses, conditions->name)) {
-                    printf("Le fait %s est référencé\n", conditions->name);
+                    printf("  -%s\n", conditions->name);
                     ajouter_reponse(&liste_reponses, conditions->name);
                 }
             }
@@ -213,7 +213,7 @@ void affiche_faits_possibles(liste_regles *liste) {
         // Check the rule's conclusion
         if (liste->name != NULL) {
             if (!reponse_deja_donnee(liste_reponses, liste->name)) {
-                printf("Le fait %s est référencé\n", liste->name);
+                printf("  -%s\n", liste->name);
                 ajouter_reponse(&liste_reponses, liste->name);
             }
         }
