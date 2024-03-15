@@ -34,6 +34,13 @@
 #define BG "\x1b[48;5;92m"
 
 
+
+/**
+ * La fonction « menu » permet à l'utilisateur d'interagir avec un système basé sur des règles en
+ * choisissant des bases de règles et de faits, en ajoutant des faits et des règles, en affichant les
+ * faits et les règles actuels, en effectuant un chaînage avant, un chaînage arrière et en quittant le
+ * programme.
+ */
 void menu(void){
     int choice;
     bool quit = false;
@@ -182,6 +189,10 @@ void menu(void){
     printf(COLOR_RESET"\n");
 }
 
+
+/**
+ * La fonction `clear_buffer` efface récursivement le tampon d'entrée en C.
+ */
 void clear_buffer() {
     int c = getchar();
     if (c != '\n' && c != EOF) {

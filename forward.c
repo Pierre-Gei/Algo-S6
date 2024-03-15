@@ -8,6 +8,8 @@
 #include "traitement.h"
 #include "forward.h"
 
+/* La fonction `ajout_fait` est chargée d'ajouter un fait à une liste de faits dans un système basé sur
+des règles. Voici un aperçu de ce que fait la fonction : */
 liste_faits *ajout_fait(liste_faits *liste, char *fait)
 {
     if (liste == NULL)
@@ -66,6 +68,11 @@ liste_reponses *ajout_reponse(liste_reponses *liste, char *reponse)
     return liste;
 }
 
+/* La fonction `int doublon_reponse (liste_reponses *liste, char *reponse)` vérifie les doublons dans
+une liste de réponses. Il parcourt la liste des réponses et compare chaque réponse avec la « réponse
+» donnée. Si une réponse en double est trouvée, elle renvoie 1 ; sinon, elle renvoie 0. Cette
+fonction permet de garantir que la même réponse n'est pas ajoutée plusieurs fois à la liste des
+réponses. */
 int doublon_reponse (liste_reponses *liste, char *reponse)
 {
     if (liste == NULL)
@@ -75,6 +82,10 @@ int doublon_reponse (liste_reponses *liste, char *reponse)
     return doublon_reponse(liste->suivant, reponse);
 }
 
+/* La fonction `int doublon_fait (liste_faits *liste, char *fait)` vérifie les doublons dans une liste
+de faits. Il parcourt récursivement la liste des faits et compare chaque fait avec le « fait »
+donné. Si un fait en double est trouvé, il renvoie 1 ; sinon, elle renvoie 0. Cette fonction
+garantit que le même fait n'est pas ajouté plusieurs fois à la liste des faits. */
 int doublon_fait (liste_faits *liste, char *fait)
 {
     if (liste == NULL)
@@ -84,6 +95,9 @@ int doublon_fait (liste_faits *liste, char *fait)
     return doublon_fait(liste->suivant, fait);
 }
 
+/* La fonction `verifier_faits` vérifie si une condition spécifique est présente dans une liste de
+faits. Il prend en entrée un pointeur vers une liste de faits (« faits ») et une condition à
+vérifier (« condition »). */
 int verifier_faits(liste_faits *faits, char *condition)
 {
     if (faits == NULL)
@@ -96,6 +110,9 @@ int verifier_faits(liste_faits *faits, char *condition)
         return 0;
 }
 
+/* La fonction `verifier_conditions` vérifie si une condition spécifique est présente dans une liste de
+faits. Il prend en entrée un pointeur vers une liste de faits (« faits ») et une condition à
+vérifier (« conditions »). */
 int verifier_conditions(liste_faits *faits, liste_conditions *conditions)
 {
     if (conditions == NULL)
@@ -110,6 +127,10 @@ int verifier_conditions(liste_faits *faits, liste_conditions *conditions)
     return 0;
 }
 
+/* La fonction `verif_totale` vérifie si toutes les conditions spécifiées dans une liste de règles
+(`regles`) sont remplies en fonction des faits de la liste (`faits`). Si toutes les conditions d'une
+règle sont satisfaites, la réponse associée à cette règle est ajoutée à la liste des réponses («
+réponses »). De plus, le fait correspondant à la réponse est ajouté à la liste des faits. */
 int verif_totale(liste_faits *faits, liste_regles *regles, liste_reponses **reponses)
 {
     if (regles == NULL)
@@ -125,6 +146,11 @@ int verif_totale(liste_faits *faits, liste_regles *regles, liste_reponses **repo
         return 1;
 }
 
+/* La fonction `parcours` parcourt récursivement une liste de règles (`regles`) et vérifie si toutes
+les conditions spécifiées dans chaque règle sont remplies en fonction des faits de la liste
+(`faits`). Si toutes les conditions d'une règle sont satisfaites, la réponse associée à cette règle
+est ajoutée à la liste des réponses (« réponses »). De plus, le fait correspondant à la réponse est
+ajouté à la liste des faits. */
 int parcours(liste_faits *faits, liste_regles *regles, liste_reponses **reponses) 
 {
     liste_reponses *anciennes_reponses = NULL;
@@ -143,6 +169,10 @@ int parcours(liste_faits *faits, liste_regles *regles, liste_reponses **reponses
     return 0;
 }
 
+/* La fonction `void copier_liste_reponses(liste_reponses *src, liste_reponses **dest)` est chargée de
+copier une liste chaînée de réponses de la liste source `src` vers la liste de destination `dest`.
+Il parcourt récursivement chaque nœud de la liste source et ajoute un nouveau nœud avec la même
+réponse à la liste de destination. */
 void copier_liste_reponses(liste_reponses *src, liste_reponses **dest)
 {
     if (src == NULL)
@@ -151,6 +181,8 @@ void copier_liste_reponses(liste_reponses *src, liste_reponses **dest)
     copier_liste_reponses(src->suivant, dest);
 }
 
+/* La fonction `compare_liste_reponses` compare deux listes chaînées de réponses (`liste1` et
+`liste2`). Il vérifie récursivement si les réponses dans chaque nœud des deux listes sont les mêmes. */
 int compare_liste_reponses(liste_reponses *liste1, liste_reponses *liste2)
 {
     if (liste1 == NULL && liste2 == NULL)
@@ -162,6 +194,11 @@ int compare_liste_reponses(liste_reponses *liste1, liste_reponses *liste2)
     return compare_liste_reponses(liste1->suivant, liste2->suivant);
 }
 
+/* La fonction `affiche_liste_reponses` se charge d'afficher le contenu d'une liste chaînée de
+réponses. Il vérifie d'abord si la liste est vide et imprime un message si c'est le cas. Ensuite, il
+parcourt la liste et imprime chaque réponse une par une jusqu'à atteindre la fin de la liste. Cette
+fonction permet de visualiser les réponses stockées dans la liste chaînée à des fins de débogage ou
+de sortie. */
 void affiche_liste_reponses(liste_reponses *liste)
 {
     if (liste == NULL)

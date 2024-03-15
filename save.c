@@ -4,6 +4,8 @@
 
 #include "save.h"
 
+/* La fonction `load_to_list` est responsable du chargement des règles à partir d'un fichier spécifié
+par `filename` dans une liste chaînée de règles pointées par `liste`. */
 void load_to_list(char *filename, liste_regles **liste)
 {
     FILE *file = fopen(filename, "r");
@@ -51,6 +53,9 @@ void load_to_list(char *filename, liste_regles **liste)
     fclose(file);
 }
 
+/* La fonction `load_faits_to_list_recursive(FILE *file, liste_faits **liste)` est chargée de lire
+récursivement les lignes d'un fichier pointé par `file` et d'ajouter chaque ligne en tant que fait à
+une liste chaînée de faits pointés par `liste`. */
 void load_faits_to_list_recursive(FILE *file, liste_faits **liste)
 {
     char *line = NULL;
@@ -73,6 +78,9 @@ void load_faits_to_list_recursive(FILE *file, liste_faits **liste)
     }
 }
 
+/* La fonction `load_faits_to_list` est responsable du chargement des faits à partir d'un fichier
+spécifié par `filename` dans une liste chaînée de faits pointée par `liste`. Il lit les lignes du
+fichier de manière récursive et ajoute chaque ligne comme un fait à la liste chaînée. */
 void load_faits_to_list(char *filename, liste_faits **liste)
 {
     FILE *file = fopen(filename, "r");
@@ -81,7 +89,11 @@ void load_faits_to_list(char *filename, liste_faits **liste)
         printf("Fichier inconnu \n");
         return;
     }
-    load_faits_to_list_recursive(file, liste);
+    l/* `divide_and_add_faits` est une fonction qui prend une chaîne de faits (`faits`), la divise en
+    faits individuels en utilisant l'espace comme délimiteur, ajoute chaque fait individuel à une
+    liste chaînée de faits pointée par `liste`, et ajoute également chaque fait vers un fichier
+    spécifié par `filename` à l'aide de la fonction `ajoute_fait_fichier`. */
+    oad_faits_to_list_recursive(file, liste);
 }
 
 void divide_and_add_faits(liste_faits **liste, char *faits, char *filename)
@@ -95,6 +107,8 @@ void divide_and_add_faits(liste_faits **liste, char *faits, char *filename)
     }
 }
 
+/* La fonction `ajoute_fait_fichier(char *filename, char *fait)` se charge d'ajouter un fait (`fait`) à
+un fichier spécifié par `filename`. Voici un aperçu de ce que fait la fonction : */
 void ajoute_fait_fichier(char *filename, char *fait)
 {
     if (strcmp(fait, " ") == 0)
@@ -125,6 +139,11 @@ void ajoute_fait_fichier(char *filename, char *fait)
     fclose(file);
 }
 
+
+/* La fonction `ajoute_regle_fichier(char *filename, char *regle)` est chargée d'ajouter une règle
+(`regle`) à un fichier spécifié par `filename`. Il ouvre le fichier en mode ajout, supprime tous les
+caractères de nouvelle ligne à la fin de la règle, puis écrit la règle suivie d'un point-virgule
+dans le fichier. Enfin, il ferme le fichier. */
 void ajoute_regle_fichier(char *filename, char *regle)
 {
     FILE *file = fopen(filename, "a+");
