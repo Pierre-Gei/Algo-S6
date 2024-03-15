@@ -38,6 +38,9 @@ liste_faits *ajout_fait(liste_faits *liste, char *fait)
     return liste;
 }
 
+/* La fonction `liste_reponses *ajout_reponse(liste_reponses *liste, char *reponse)` est chargée
+d'ajouter une réponse à une liste de réponses dans un système basé sur des règles. Voici un aperçu
+de ce que fait la fonction : */
 liste_reponses *ajout_reponse(liste_reponses *liste, char *reponse)
 {
     if (liste == NULL)
