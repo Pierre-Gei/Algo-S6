@@ -184,6 +184,7 @@ void ajoute_regle_fichier(FILE * file, char *regle)
         return;
     }
     size_t length = strlen(regle);
+    
     if (regle[length - 1] == '\n')
     {
         regle[length - 1] = '\0';
@@ -212,7 +213,7 @@ char *regle_en_chaine(char *regle, liste_conditions *conditions) {
     // Allouer de la mémoire pour la nouvelle règle
     char *new_regle = (char *)malloc((total_len + 1) * sizeof(char)); // +1 pour le caractère nul de fin de chaîne
     if (new_regle == NULL) {
-        fprintf(stderr, "Erreur d'allocation de mémoire\n");
+        printf("Erreur d'allocation de mémoire\n");
         return NULL;
     }
     
@@ -227,7 +228,7 @@ char *regle_en_chaine(char *regle, liste_conditions *conditions) {
         cur_condition = cur_condition->suivant;
     }
     
-    free(new_regle); // Free the allocated memory
+    free(new_regle);
     
     return new_regle;
 }
