@@ -200,6 +200,7 @@ void gestionEvenement(EvenementGfx evenement)
                     demandeTemporisation(-1);
                     break;
             }
+            break;
 
 
         case ClavierSpecial:

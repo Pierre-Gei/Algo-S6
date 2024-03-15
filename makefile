@@ -1,17 +1,12 @@
-CC := gcc
-CFLAGS := -Wall -O2 -o
-CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g
-DEPS = backwards.h forward.h structures.h traitement.h save.h terminal_menu.c
-OBJ = main.o backwards.o forward.o traitement.o save.o terminal_menu.o
 
 BUILDDIR := ./build
 INCLUDE := ./include
 SRC := ./src
-SRCFILES := affichage.c main.c backwards.c forward.c save.c traitement.c
+SRCFILES := affichage.c main.c backwards.c forward.c save.c traitement.c terminal_menu.c
 OBJFILES := $(patsubst %.c, $(BUILDDIR)/%.o, $(SRCFILES))
 
-all: $(BUILDDIR) libisentlib.a affichage
+all: $(BUILDDIR) libisentlib.a main
 
 $(BUILDDIR):
 	mkdir $(BUILDDIR)
@@ -19,14 +14,14 @@ $(BUILDDIR):
 libisentlib.a:
 	make -C gfxlib/
 
-affichage: $(OBJFILES)
-	$(CC) $(CFLAGS) $@ $^ gfxlib/build/libisentlib.a -lm -lglut -lGL -lX11 -pthread
+main: $(OBJFILES)
+	$(CC) $(CFLAGS) -o $@ $^ gfxlib/build/libisentlib.a -lm -lglut -lGL -lX11 -pthread
 
-$(BUILDDIR)/%.o: $(SRC)/%.c
-	$(CC) $(CFLAGS) $@ -c $< -Wno-unused-result
+$(BUILDDIR)/%.o: $(SRC)/%.c $(BUILDDIR)
+	$(CC) $(CFLAGS) -c $< -o $@ -Wno-unused-result
 
 clean:
 	make clean -C gfxlib/
 	rm -f $(BUILDDIR)/*.o
 	rm -fr $(BUILDDIR)
-	rm -f affichage
+	rm -f main

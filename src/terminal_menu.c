@@ -3,18 +3,18 @@
 //
 
 #include <stdio.h>
-#include "terminal_menu.h"
+#include "../include/terminal_menu.h"
 
 
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
-#include "structures.h"
-#include "forward.h"
-#include "save.h"
-#include "backwards.h"
-#include "traitement.h"
-#include "terminal_menu.h"
+#include "../include/terminal_menu.h"
+#include "../include/structures.h"
+#include "../include/forward.h"
+#include "../include/save.h"
+#include "../include/backwards.h"
+#include "../include/traitement.h"
 #define TAILLE_MAX 256
 
 

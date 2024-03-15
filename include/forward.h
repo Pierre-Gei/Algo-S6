@@ -5,6 +5,8 @@
 #ifndef ALGO_S6_FORWARD_H
 #define ALGO_S6_FORWARD_H
 
+#include "structures.h"
+
 /*Ajouter un fait dans une liste de fait par le biais d'une chaine de caractères*/
 liste_faits *ajout_fait(liste_faits *liste, char *fait);
 

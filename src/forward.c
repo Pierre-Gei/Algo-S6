@@ -6,9 +6,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "traitement.h"
-#include "structures.h"
-#include "forward.h"
+#include "../include/traitement.h"
+#include "../include/structures.h"
+#include "../include/forward.h"
 
 liste_faits *ajout_fait(liste_faits *liste, char *fait)
 {
