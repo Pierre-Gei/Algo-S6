@@ -34,7 +34,8 @@
         "functions/main",
         "functions/terminal_menu",
         "functions/backwards",
-        "functions/forward"
+        "functions/forward",
+        "functions/save"
       ]
     }
   ],
