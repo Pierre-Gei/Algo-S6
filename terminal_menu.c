@@ -183,6 +183,9 @@ void menu(void){
                 free(nom_base_regles);
                 quit = true;
                 continue;
+            default:
+                printf("Choix invalide\n");
+                break;
         }
         choice = 0;
     } while(quit == false);

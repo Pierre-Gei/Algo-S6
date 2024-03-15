@@ -1,3 +1,23 @@
 ---
 title: Introduction
 ---
+
+# Introduction et architecture globale
+Le projet est organisé en plusieurs fichiers source et en-têtes qui implémentent les différentes fonctionnalités :
+
+* **main.c** : Point d'entrée principal. Démarre l'interaction avec l'utilisateur en appelant la fonction `menu`.
+* **terminal_menu.c et terminal_menu.h** : Gèrent l'interface texte de l'utilisateur. Fournissent un menu interactif.
+* **forward.c/h et backwards.c/h** : Implémentent les algorithmes de chaînage avant et arrière.
+* **traitement.c/h** : Fonctions pour ajouter/afficher des faits et règles, et libérer la mémoire allouée.
+* **save.c/h** : Gèrent le chargement et la sauvegarde des faits et règles depuis des fichiers.
+* **structures.h** : Définit les structures de données utilisées (faits, règles, conditions, réponses).
+* **gfxlib** : Bibliothèque graphique pour l'affichage en mode graphique.
+* **docs** : Documentation du projet.
+* **build** : Dossier de compilation de la librairie graphique.
+* **faits.kbs** : Fichier de sauvegarde des faits par défaut.
+* **regles.kbs** : Fichier de sauvegarde des règles par défaut.
+
+# Détails des fonctions
+Les fonctions sont détaillées par fichier dans les pages suivantes. Chaque fonction est décrite par son prototype, sa description, ses paramètres et sa valeur de retour.
+- [main.c](main)
+

@@ -1,0 +1,21 @@
+---
+title: main.c
+---
+
+`main.c` est le fichier source principal du programme. Il contient la fonction `main` qui est la première fonction appelée lors de l'exécution du programme.
+
+
+# `int main(int argc, char *argv[])`
+### Description
+Fonction principale du programme.
+
+### Fonctionnement
+La fonction `main` est la première fonction appelée lors de l'exécution du programme. Elle prend en paramètre le nombre d'arguments passés au programme et un tableau de chaînes de caractères contenant ces arguments.
+Si l'argument '-cli' est passé, le programme apelle la fonction [menu](menu) pour afficher le menu en ligne de commande, sinon il appelle la fonction [menuGraphique](menuGraphique) pour afficher le menu graphique.
+
+### Paramètres
+- `argc` : Nombre d'arguments passés au programme.
+- `argv` : Tableau de chaînes de caractères contenant les arguments passés au programme.
+
+### Retour
+- `0` : Tout s'est bien passé.

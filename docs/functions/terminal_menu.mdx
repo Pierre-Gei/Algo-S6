@@ -1,0 +1,30 @@
+---
+title: 'terminal_menu.c/h'
+---
+
+`terminal_menu.c` est le fichier source qui contient le code source du menu CLI.
+
+# `void menu(void)`
+
+### Description
+Cette fonction affiche un menu dans le terminal et permet à l'utilisateur de choisir une option en entrant un nombre.
+
+### Fonctionnement
+A chaque appel de la fonction, le menu est affiché dans le terminal. L'utilisateur doit entrer un nombre pour choisir une option. Si l'entrée n'est pas un nombre ou si le nombre n'est pas dans l'intervalle des options le programme affiche un message d'erreur et redemande à l'utilisateur de choisir une option.
+Les options sont les suivantes :
+1. Choisir une base de règles
+2. Choisir une base de faits
+3. Ajouter des faits à la base de faits
+4. Ajouter des règles à la base de règles
+5. Affichage des faits et règles actuelles
+6. Chaînage avant
+7. Chaînage arrière
+8. Quitter
+
+# `void clear_buffer(void)`
+
+### Description
+Cette fonction vide le buffer d'entrée.
+
+### Fonctionnement
+La fonction lit les caractères un par un jusqu'à ce que le caractère lu soit un retour à la ligne.
