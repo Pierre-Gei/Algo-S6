@@ -26,6 +26,14 @@
             "data-structures/introduction",
             "data-structures/structures"
         ]
+    },
+    {
+      "group": "Architecture et fonctions",
+      "pages": [
+        "functions/introduction",
+        "functions/main",
+        "functions/terminal_menu"
+      ]
     }
   ],
   "footerSocials": {
