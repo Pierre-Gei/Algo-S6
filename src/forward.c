@@ -212,6 +212,9 @@ void affiche_liste_reponses(liste_reponses *liste)
     printf_recursive(liste);
 }
 
+/* La fonction `printf_recursive` est une fonction auxiliaire qui imprime récursivement le contenu
+ * d'une liste chaînée de réponses. Elle est utilisée par la fonction `affiche_liste_reponses` pour
+ * imprimer chaque réponse de la liste. */
 void printf_recursive(liste_reponses *liste) 
 {
     if (liste == NULL) 

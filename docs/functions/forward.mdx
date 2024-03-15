@@ -172,7 +172,25 @@ La fonction `affiche_liste_reponses` se charge d'afficher le contenu d'une liste
 réponses.
 
 ### Fonctionnement
-La fonction `affiche_liste_reponses` vérifie d'abord si la liste est vide et imprime un message si c'est le cas. Ensuite, il parcourt la liste et imprime chaque réponse une par une jusqu'à atteindre la fin de la liste.
+La fonction `affiche_liste_reponses` vérifie d'abord si la liste est vide et imprime un message si c'est le cas. Ensuite, il parcourt récursivement la liste et imprime chaque réponse une par une jusqu'à atteindre la fin de la liste.
+
+### Paramètres
+- `liste_reponses *liste` : la liste à afficher (de type [liste_reponses](/data-structures/structures#liste-des-reponses-liste-reponses))
+
+### Retour
+- `void`
+
+# `void printf_recursive(liste_reponses *liste) `
+
+### Description
+
+La fonction `printf_recursive` est une fonction auxiliaire qui imprime récursivement le contenu
+d'une liste chaînée de réponses. Elle est utilisée par la fonction `affiche_liste_reponses` pour
+imprimer chaque réponse de la liste.
+
+### Fonctionnement
+
+La fonction `printf_recursive` imprime le contenu de la liste de réponses en parcourant récursivement la liste et en imprimant chaque élément.
 
 ### Paramètres
 - `liste_reponses *liste` : la liste à afficher (de type [liste_reponses](/data-structures/structures#liste-des-reponses-liste-reponses))
