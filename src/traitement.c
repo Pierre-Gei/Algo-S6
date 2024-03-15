@@ -2,6 +2,7 @@
 // Created by Pierre Geiguer on 12/03/2024.
 //
 
+
 #include <string.h>
 #include "../include/traitement.h"
 #include "stdio.h"
@@ -11,7 +12,6 @@
 void add_regle(liste_regles **liste, char *name, liste_conditions *conditions)
 {
     if (*liste == NULL) {
-        // Si la liste est vide, créer un nouveau nœud et le placer en tête de liste
         liste_regles *new = malloc(sizeof(liste_regles));
         if (new == NULL) {
             printf("Erreur: Impossible d'allouer de la mémoire\n");
@@ -30,10 +30,10 @@ void add_regle(liste_regles **liste, char *name, liste_conditions *conditions)
 
         *liste = new;
     } else {
-        // Appel récursif pour ajouter la règle à la fin de la liste
         add_regle(&((*liste)->suivant), name, conditions);
     }
 }
+
 
 
 void add_condition(liste_conditions **liste, char *name)
@@ -111,10 +111,8 @@ void print_liste_regles(liste_regles *liste) /////////// RENDRE RECURSIF
     }
 }
 
-void add_fait(liste_faits **liste, char *fait)
-{
+void add_fait(liste_faits **liste, char *fait) {
     if (*liste == NULL) {
-        // Cas de base : la liste est vide, donc créer un nouveau noeud et le placer en tête de liste
         liste_faits *new = malloc(sizeof(liste_faits));
         if (new == NULL) {
             printf("Erreur: Impossible d'allouer de la mémoire\n");
@@ -129,7 +127,6 @@ void add_fait(liste_faits **liste, char *fait)
         new->suivant = NULL;
         *liste = new;
     } else {
-        // Cas récursif : passer à l'élément suivant dans la liste
         add_fait(&((*liste)->suivant), fait);
     }
 }
@@ -170,16 +167,22 @@ void liberer_liste_faits(liste_faits **liste)
     free(*liste);
     *liste = NULL;
 }
-
-void liberer_liste_conditions(liste_conditions **liste)
-{
+void liberer_liste_conditions(liste_conditions **liste) {
+    printf("liberer_liste_conditions\n");
     if (*liste == NULL)
         return;
-    liberer_liste_conditions(&(*liste)->suivant);
+
+    liberer_liste_conditions(&((*liste)->suivant));
+
     free((*liste)->name);
+
+    liste_conditions *suivant = (*liste)->suivant;
+
     free(*liste);
-    *liste = NULL;
+
+    *liste = suivant;
 }
+
 
 void liberer_liste_regles(liste_regles **liste)
 {
@@ -192,3 +195,49 @@ void liberer_liste_regles(liste_regles **liste)
     *liste = NULL;
 }
 
+void affiche_faits_possibles(liste_regles *liste) {
+    liste_reponses *liste_reponses = NULL;
+
+    while (liste != NULL) {
+        // Check the rule's conditions
+        liste_conditions *conditions = liste->conditions;
+        while (conditions != NULL) {
+            if (conditions->name != NULL) {
+                if (!reponse_deja_donnee(liste_reponses, conditions->name)) {
+                    printf("Le fait %s est référencé\n", conditions->name);
+                    ajouter_reponse(&liste_reponses, conditions->name);
+                }
+            }
+            conditions = conditions->suivant;
+        }
+
+        // Check the rule's conclusion
+        if (liste->name != NULL) {
+            if (!reponse_deja_donnee(liste_reponses, liste->name)) {
+                printf("Le fait %s est référencé\n", liste->name);
+                ajouter_reponse(&liste_reponses, liste->name);
+            }
+        }
+
+        liste = liste->suivant;
+    }
+
+    liberer_liste_reponses(&liste_reponses);
+}
+
+bool reponse_deja_donnee(liste_reponses *liste, char *reponse) {
+    while (liste != NULL) {
+        if (strcmp(liste->name, reponse) == 0) {
+            return true;
+        }
+        liste = liste->suivant;
+    }
+    return false;
+}
+
+void ajouter_reponse(liste_reponses **liste, char *reponse) {
+    liste_reponses *nouvelle_reponse = malloc(sizeof(liste_reponses));
+    nouvelle_reponse->name = strdup(reponse);
+    nouvelle_reponse->suivant = *liste;
+    *liste = nouvelle_reponse;
+}
