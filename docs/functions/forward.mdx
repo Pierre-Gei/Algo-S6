@@ -1,0 +1,181 @@
+---
+title: 'forward.c/h'
+---
+
+`forward.c` est le fichier source qui contient l'algorithme de chainage avant ainsi que toutes les fonctions utiles à son fonctionnement.
+
+# `liste_faits *ajout_fait(liste_faits *liste, char *fait)
+
+### Description
+La fonction `ajout_fait` est chargée d'ajouter un fait à une liste de faits dans un système basé sur
+des règles.
+
+### Fonctionnement
+
+La fonction `ajout_fait` prend en paramètre une liste de faits et un fait à ajouter à cette liste. Elle crée un nouvel élément de type `liste_faits` et lui affecte la valeur du fait à ajouter. Ensuite, elle ajoute cet élément à la liste de faits en le plaçant en tête de liste.
+
+### Paramètres
+- `liste_faits *liste` : la liste de faits à laquelle on veut ajouter un fait (de type [liste_faits](/data-structures/structures#liste-des-faits-liste-faits))
+- `char *fait` : le fait à ajouter à la liste.
+
+### Retour
+- `liste_faits *` : la liste de faits modifiée.
+
+# `liste_reponses *ajout_reponse(liste_reponses *liste, char *reponse)`
+
+### Description
+La fonction `liste_reponses *ajout_reponse(liste_reponses *liste, char *reponse)` est chargée
+d'ajouter une réponse à une liste de réponses dans un système basé sur des règles.
+
+### Fonctionnement
+La fonction `ajout_reponse` prend en paramètre une liste de réponses et une réponse à ajouter à cette liste. Elle crée un nouvel élément de type `liste_reponses` et lui affecte la valeur de la réponse à ajouter. Ensuite, elle ajoute cet élément à la liste de réponses en le plaçant en tête de liste.
+
+### Paramètres
+- `liste_reponses *liste` : la liste de réponses à laquelle on veut ajouter une réponse (de type [liste_reponses](/data-structures/structures#liste-des-reponses-liste-reponses))
+- `char *reponse` : la réponse à ajouter à la liste.
+
+### Retour
+- `liste_reponses *` : la liste de réponses modifiée.
+
+# `int doublon_reponse (liste_reponses *liste, char *reponse)`
+
+### Description
+
+La fonction `int doublon_reponse (liste_reponses *liste, char *reponse)` vérifie les doublons dans
+une liste de réponses.
+
+### Fonctionnement
+
+La fonction `doublon_reponse` prend en paramètre une liste de réponses et une réponse à ajouter à cette liste. Elle parcourt récursivement la liste de réponses et compare chaque élément à la réponse à ajouter. Si la réponse à ajouter est déjà présente dans la liste, la fonction retourne 1, sinon elle retourne 0.
+
+### Paramètres
+- `liste_reponses *liste` : la liste de réponses à laquelle on veut ajouter une réponse (de type [liste_reponses](/data-structures/structures#liste-des-reponses-liste-reponses))
+- `char *reponse` : la réponse à ajouter à la liste.
+
+### Retour
+- `int` : 1 si la réponse est déjà présente dans la liste, 0 sinon.
+
+# `int doublon_fait (liste_faits *liste, char *fait)`
+
+### Description
+
+La fonction `int doublon_fait (liste_faits *liste, char *fait)` vérifie les doublons dans une liste
+de faits.
+
+### Fonctionnement
+
+La fonction `doublon_fait` prend en paramètre une liste de faits et un fait à ajouter à cette liste. Elle parcourt récursivement la liste de faits et compare chaque élément à la réponse à ajouter. Si le fait à ajouter est déjà présent dans la liste, la fonction retourne 1, sinon elle retourne 0.
+
+### Paramètres
+- `liste_faits *liste` : la liste de faits à laquelle on veut ajouter un fait (de type [liste_faits](/data-structures/structures#liste-des-faits-liste-faits))
+- `char *fait` : le fait à ajouter à la liste.
+
+### Retour
+- `int` : 1 si le fait est déjà présent dans la liste, 0 sinon.
+
+# `int verifier_faits(liste_faits *faits, char *condition)`
+
+### Description
+La fonction `verifier_faits` vérifie si une condition spécifique est présente dans une liste de
+faits.
+
+### Fonctionnement
+La fonction `verifier_faits` parcourt la liste de faits et compare chaque élément à la condition à vérifier. Si la condition est présente dans la liste, la fonction retourne 1, sinon elle retourne 0.
+
+### Paramètres
+- `liste_faits *faits` : la liste de faits à parcourir (de type [liste_faits](/data-structures/structures#liste-des-faits-liste-faits))
+- `char *condition` : la condition à vérifier.
+
+### Retour
+- `int` : 1 si la condition est présente dans la liste, 0 sinon.
+
+# `int verifier_conditions(liste_faits *faits, liste_conditions *conditions)`
+
+### Description
+
+La fonction `verifier_conditions` vérifie si une condition spécifique est présente dans une liste de
+faits.
+
+### Fonctionnement
+
+La fonction `verifier_conditions` parcourt la liste de conditions et compare chaque élément à la liste de faits. Si la condition est présente dans la liste de faits, la fonction retourne 1, sinon elle retourne 0.
+
+### Paramètres
+- `liste_faits *faits` : la liste de faits à parcourir (de type [liste_faits](/data-structures/structures#liste-des-faits-liste-faits))
+- `liste_conditions *conditions` : la liste de conditions à vérifier (de type [liste_conditions](/data-structures/structures#liste-des-conditions-liste-conditions))
+
+### Retour
+- `int` : 1 si la condition est présente dans la liste de faits, 0 sinon.
+
+# `int parcours(liste_faits *faits, liste_regles *regles, liste_reponses **reponses)`
+
+### Description
+
+La fonction `parcours` parcourt récursivement une liste de règles (`regles`) et vérifie si toutes
+les conditions spécifiées dans chaque règle sont remplies en fonction des faits de la liste
+(`faits`). C'est le coeur de l'algorithme de chainage avant.
+
+### Fonctionnement
+
+La fonction `parcours` parcourt récursivement la liste de règles et vérifie si toutes les conditions spécifiées dans chaque règle sont remplies en fonction des faits de la liste. Si toutes les conditions d'une règle sont satisfaites, la réponse associée à cette règle est ajoutée à la liste des réponses. De plus, le fait correspondant à la réponse est ajouté à la liste des faits.
+
+### Paramètres
+- `liste_faits *faits` : la liste de faits à parcourir (de type [liste_faits](/data-structures/structures#liste-des-faits-liste-faits))
+- `liste_regles *regles` : la liste de règles à parcourir (de type [liste_regles](/data-structures/structures#liste-des-regles-liste-regles))
+- `liste_reponses **reponses` : la liste de réponses à remplir (de type [liste_reponses](/data-structures/structures#liste-des-reponses-liste-reponses))
+
+### Retour
+- `int` : 0
+
+# `void copier_liste_reponses(liste_reponses *src, liste_reponses **dest)`
+
+### Description
+
+La fonction `void copier_liste_reponses(liste_reponses *src, liste_reponses **dest)` est chargée de
+copier une liste chaînée de réponses de la liste source `src` vers la liste de destination `dest`.
+
+### Fonctionnement
+
+La fonction `copier_liste_reponses` parcourt récursivement la liste source et ajoute chaque élément à la liste de destination.
+
+### Paramètres
+- `liste_reponses *src` : la liste source à copier (de type [liste_reponses](/data-structures/structures#liste-des-reponses-liste-reponses))
+- `liste_reponses **dest` : la liste de destination (de type [liste_reponses](/data-structures/structures#liste-des-reponses-liste-reponses))
+
+### Retour
+- `void`
+
+# `int compare_liste_reponses(liste_reponses *liste1, liste_reponses *liste2)`
+
+### Description
+
+La fonction `compare_liste_reponses` compare deux listes chaînées de réponses (`liste1` et
+`liste2`).
+
+### Fonctionnement
+
+La fonction `compare_liste_reponses` parcourt récursivement les deux listes et compare chaque élément. Si les deux listes sont identiques, la fonction retourne 1, sinon elle retourne 0.
+
+### Paramètres
+
+- `liste_reponses *liste1` : la première liste à comparer (de type [liste_reponses](/data-structures/structures#liste-des-reponses-liste-reponses))
+- `liste_reponses *liste2` : la deuxième liste à comparer (de type [liste_reponses](/data-structures/structures#liste-des-reponses-liste-reponses))
+
+### Retour
+- `int` : 1 si les deux listes sont identiques, 0 sinon.
+
+# `void affiche_liste_reponses(liste_reponses *liste)`
+
+### Description
+
+La fonction `affiche_liste_reponses` se charge d'afficher le contenu d'une liste chaînée de
+réponses.
+
+### Fonctionnement
+La fonction `affiche_liste_reponses` vérifie d'abord si la liste est vide et imprime un message si c'est le cas. Ensuite, il parcourt la liste et imprime chaque réponse une par une jusqu'à atteindre la fin de la liste.
+
+### Paramètres
+- `liste_reponses *liste` : la liste à afficher (de type [liste_reponses](/data-structures/structures#liste-des-reponses-liste-reponses))
+
+### Retour
+- `void`
