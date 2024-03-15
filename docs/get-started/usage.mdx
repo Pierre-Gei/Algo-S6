@@ -1,0 +1,37 @@
+---
+title: Utilisation
+---
+
+# Mode GUI
+
+# Mode CLI (lancé avec l'options `-cli`)
+## Menu
+
+Le menu est l'interface principale de l'application. Il offre plusieurs options à l'utilisateur :
+
+1. **Choisir une base de règles** : Cette option permet à l'utilisateur de choisir une base de règles à partir d'un fichier. L'utilisateur doit fournir le nom du fichier (avec son extension).
+
+2. **Choisir une base de faits** : Cette option permet à l'utilisateur de choisir une base de faits à partir d'un fichier. L'utilisateur doit fournir le nom du fichier (avec son extension).
+
+3. **Ajouter des faits à la base de faits** : Cette option permet à l'utilisateur d'ajouter des faits à la base de faits actuelle. L'utilisateur doit entrer les faits un par un, sous le format:
+```text
+fait1;
+fait2;
+```
+
+4. **Ajouter des règles à la base de règles** : Cette option permet à l'utilisateur d'ajouter des règles à la base de règles actuelle. L'utilisateur doit entrer les règles une par une, sous le format:
+```text
+fait1 ,fait2 -> fait3;
+fait4 -> fait5;
+```
+
+5. **Affichage des faits et règles actuelles** : Cette option affiche la liste actuelle des faits et des règles.
+
+6. **Chaînage avant** : Cette option effectue un chaînage avant à partir des faits et des règles actuels.
+
+7. **Chaînage arrière** : Cette option effectue un chaînage arrière à partir des faits et des règles actuels, et demande à l'utilisateur le fait qu'il souhaite prouver.
+
+8. **Quitter** : Cette option permet à l'utilisateur de quitter l'application.
+
+
+Chaque option est activée en entrant le numéro correspondant dans le terminal.

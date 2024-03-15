@@ -1,0 +1,41 @@
+---
+title: Installation
+---
+
+# Prérequis
+- **OS**: Linux (Ubuntu, Debian, CentOS, Fedora, RedHat, etc.) Native, WSL ou VM
+- **Compilateur**: GCC
+- **Outils**: Make, Git, Valgrind (optionnel)
+
+# Installation
+
+## 1. Téléchargement
+```bash
+git clone https://github.com/Pierre-Gei/Algo-S6.git
+```
+
+## 2. Compilation
+```bash
+cd Algo-S6
+make
+```
+
+## 3. Exécution
+```bash
+./main
+```
+
+# Fonctionnalités avancées
+## Lancement en mode CLI
+```bash
+./main -cli
+```
+## Nettoyage
+```bash
+make clean
+```
+
+## Compilation et run avec detection de fuites de mémoire
+```bash
+make valgrind
+```
