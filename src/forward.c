@@ -71,8 +71,8 @@ liste_reponses *ajout_reponse(liste_reponses *liste, char *reponse)
 }
 
 /* La fonction `int doublon_reponse (liste_reponses *liste, char *reponse)` vérifie les doublons dans
-une liste de réponses. Il parcourt la liste des réponses et compare chaque réponse avec la « réponse
-» donnée. Si une réponse en double est trouvée, elle renvoie 1 ; sinon, elle renvoie 0. Cette
+une liste de réponses. Il parcourt la liste des réponses et compare chaque réponse avec la «réponse
+» donnée. Si une réponse en double est trouvée, elle renvoie 1; sinon, elle renvoie 0. Cette
 fonction permet de garantir que la même réponse n'est pas ajoutée plusieurs fois à la liste des
 réponses. */
 int doublon_reponse (liste_reponses *liste, char *reponse)
@@ -86,7 +86,7 @@ int doublon_reponse (liste_reponses *liste, char *reponse)
 
 /* La fonction `int doublon_fait (liste_faits *liste, char *fait)` vérifie les doublons dans une liste
 de faits. Il parcourt récursivement la liste des faits et compare chaque fait avec le « fait »
-donné. Si un fait en double est trouvé, il renvoie 1 ; sinon, elle renvoie 0. Cette fonction
+donné. Si un fait en double est trouvé, il renvoie 1; sinon, elle renvoie 0. Cette fonction
 garantit que le même fait n'est pas ajouté plusieurs fois à la liste des faits. */
 int doublon_fait (liste_faits *liste, char *fait)
 {
