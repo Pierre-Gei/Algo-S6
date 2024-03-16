@@ -23,6 +23,8 @@ La fonction `add_regle` prend en paramètre l'adresse de la tête de liste, le n
 
 - `void`
 
+---
+
 # `void add_condition(liste_conditions **liste, char *name)`
 
 ### Description
@@ -41,6 +43,8 @@ La fonction `add_condition` prend en paramètre l'adresse de la tête de liste e
 ### Retour
 
 - `void`
+
+---
 
 # `void add_condition_to_regle(liste_regles **liste, char *name_regle, char *name_condition)`
 
@@ -62,6 +66,8 @@ La fonction `add_condition_to_regle` prend en paramètre l'adresse de la tête d
 
 - `void`
 
+---
+
 # `void print_liste_regles(liste_regles *liste)`
 
 ### Description
@@ -79,6 +85,8 @@ La fonction `print_liste_regles` prend en paramètre la tête de liste et parcou
 ### Retour
 
 - `void`
+
+---
 
 # `void add_fait(liste_faits **liste, char *fait)`
 
@@ -99,6 +107,8 @@ La fonction `add_fait` prend en paramètre l'adresse de la tête de liste et le 
 
 - `void`
 
+---
+
 # `void affiche_liste_faits(liste_faits *liste)`
 
 ### Description
@@ -117,4 +127,143 @@ La fonction `affiche_liste_faits` prend en paramètre la tête de liste et parco
 
 - `void`
 
+---
 
+# `void  liberer_liste_reponses(liste_reponses **liste)`
+
+### Description
+
+`liberer_liste_reponses` est une fonction qui libère la mémoire allouée pour une liste de réponses.
+
+### Fonctionnement
+
+La fonction `liberer_liste_reponses` prend en paramètre l'adresse de la tête de liste et libère récursivement la mémoire allouée pour chaque nœud de la liste.
+
+### Paramètres
+
+- `liste_reponses **liste` : l'adresse de la tête de liste (de type [liste_reponses](/data-structures/structures#liste-des-reponses-liste-reponses))
+
+### Retour
+
+- `void`
+
+---
+
+# `void liberer_liste_faits(liste_faits **liste)`
+
+### Description
+
+`liberer_liste_faits` est une fonction qui libère la mémoire allouée pour une liste de faits.
+
+### Fonctionnement
+
+La fonction `liberer_liste_faits` prend en paramètre l'adresse de la tête de liste et libère récursivement la mémoire allouée pour chaque nœud de la liste.
+
+### Paramètres
+
+- `liste_faits **liste` : l'adresse de la tête de liste (de type [liste_faits](/data-structures/structures#liste-des-faits-liste-faits))
+
+### Retour
+
+- `void`
+
+---
+
+# `void liberer_liste_conditions(liste_conditions **liste)`
+
+### Description
+
+`liberer_liste_conditions` est une fonction qui libère la mémoire allouée pour une liste de conditions.
+
+### Fonctionnement
+
+La fonction `liberer_liste_conditions` prend en paramètre l'adresse de la tête de liste et libère récursivement la mémoire allouée pour chaque nœud de la liste.
+
+### Paramètres
+
+- `liste_conditions **liste` : l'adresse de la tête de liste (de type [liste_conditions](/data-structures/structures#liste-des-conditions-liste-conditions))
+
+### Retour
+
+- `void`
+
+---
+
+# `void liberer_liste_regles(liste_regles **liste)`
+
+### Description
+
+`liberer_liste_regles` est une fonction qui libère la mémoire allouée pour une liste de règles.
+
+### Fonctionnement
+
+La fonction `liberer_liste_regles` prend en paramètre l'adresse de la tête de liste et libère récursivement la mémoire allouée pour chaque nœud de la liste.
+
+### Paramètres
+
+- `liste_regles **liste` : l'adresse de la tête de liste (de type [liste_regles](/data-structures/structures#liste-des-regles-liste-regles))
+
+### Retour
+
+- `void`
+
+---
+
+# `void affiche_faits_possibles(liste_regles *liste)`
+
+### Description
+
+`affiche_faits_possibles` est une fonction qui affiche les faits possibles en fonction des règles.
+
+### Fonctionnement
+
+La fonction `affiche_faits_possibles` prend en paramètre la tête de liste des règles et parcourt la liste des règles pour afficher tous les faits possibles en fonction des conditions associées à chaque règle.
+
+### Paramètres
+
+- `liste_regles *liste` : la tête de liste des règles (de type [liste_regles](/data-structures/structures#liste-des-regles-liste-regles))
+
+### Retour
+
+- `void`
+
+---
+
+# `bool reponse_deja_donnee(liste_reponses *liste, char *reponse)`
+
+### Description
+
+`reponse_deja_donnee` est une fonction qui vérifie si une réponse a déjà été donnée.
+
+### Fonctionnement
+
+La fonction `reponse_deja_donnee` prend en paramètre la tête de liste des réponses et le nom de la réponse. Elle parcourt la liste des réponses pour vérifier si la réponse a déjà été donnée.
+
+### Paramètres
+
+- `liste_reponses *liste` : la tête de liste des réponses (de type [liste_reponses](/data-structures/structures#liste-des-reponses-liste-reponses))
+- `char *reponse` : le nom de la réponse
+
+### Retour
+
+- `bool` : `true` si la réponse a déjà été donnée, `false` sinon
+
+---
+
+# `void ajouter_reponse(liste_reponses **liste, char *reponse)`
+
+### Description
+
+`ajouter_reponse` est une fonction qui ajoute une nouvelle réponse à une liste de réponses.
+
+### Fonctionnement
+
+La fonction `ajouter_reponse` prend en paramètre l'adresse de la tête de liste et le nom de la réponse. Si la liste est vide, il crée un nouveau nœud pour la réponse et le place au début de la liste. Si la liste n'est pas vide, il ajoute la réponse à la fin de la liste.
+
+### Paramètres
+
+- `liste_reponses **liste` : l'adresse de la tête de liste (de type [liste_reponses](/data-structures/structures#liste-des-reponses-liste-reponses))
+
+### Retour
+
+- `void`
