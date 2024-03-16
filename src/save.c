@@ -43,7 +43,6 @@ void load_to_list(char *filename, liste_regles **liste)
         {
             continue;
         }
-        // Trim leading and trailing whitespace from the rule name
         while (isspace((unsigned char)*regle) || *regle == '>')
             regle++;
         if (*regle != 0)
@@ -54,11 +53,11 @@ void load_to_list(char *filename, liste_regles **liste)
             *(end + 1) = 0;
         }
         liste_conditions *liste_conditions = NULL;
-        char *condition = strtok(conditions, " "); // Split conditions by space
+        char *condition = strtok(conditions, " "); 
         while (condition != NULL)
         {
             add_condition(&liste_conditions, condition);
-            condition = strtok(NULL, " "); // Split conditions by space
+            condition = strtok(NULL, " "); 
         }
         add_regle(liste, regle, liste_conditions);
     }
@@ -143,12 +142,12 @@ void ajoute_fait_fichier(char *fait, FILE *file)
 {
     if (strcmp(fait, " ") == 0)
     {
-        return; // Skip saving if the word is a space
+        return; 
     }
 
     if (file == NULL)
     {
-        printf("Error while opening file");
+        printf("Erreur lors de l'ouverture du fichier\n");
         return;
     }
     size_t length = strlen(fait);
@@ -197,7 +196,7 @@ void enregistrer_liste_fait(liste_faits *nouveaux_faits, char *filename)
     FILE *file = fopen(filename, "a+");
     if (file == NULL)
     {
-        printf("Error while opening file");
+        printf("Erreur lors de l'ouverture du fichier\n");
         return;
     }
     enregistrer_liste_fait_recursif(nouveaux_faits, filename, file);
@@ -216,7 +215,7 @@ void enregistrer_liste_regle(liste_regles *nouvelles_regles, char *filename)
     FILE *file = fopen(filename, "a+");
     if (file == NULL)
     {
-        printf("Error while opening file");
+        printf("Erreur lors de l'ouverture du fichier\n");
         return;
     }
     enregistrer_liste_regle_recursif(nouvelles_regles, file);
@@ -232,7 +231,6 @@ void enregistrer_liste_regle(liste_regles *nouvelles_regles, char *filename)
  */
 void enregistrer_liste_regle_recursif (liste_regles *nouvelles_regles, FILE *file)
 {
-    printf("Enregistrement des regles\n");
     if(nouvelles_regles == NULL)
     {
         return;
@@ -240,7 +238,6 @@ void enregistrer_liste_regle_recursif (liste_regles *nouvelles_regles, FILE *fil
     char * condition = regle_en_chaine("", nouvelles_regles->conditions);
     char *regle = strcat(condition, "-> ");
     regle = strcat(regle, nouvelles_regles->name);
-    printf("Regles : %s\n", regle);
     ajoute_regle_fichier(file, regle);
     enregistrer_liste_regle_recursif(nouvelles_regles->suivant, file);
 }
@@ -255,12 +252,12 @@ void ajoute_regle_fichier(FILE * file, char *regle)
 {
     if (file == NULL)
     {
-        printf("Error while opening file");
+        printf("Erreur lors de l'ouverture du fichier\n");
         return;
     }
     if (regle == NULL || regle[0] == '\0')
     {
-        printf("Empty rule provided");
+        printf(" La règle est vide\n");
         return;
     }
     size_t length = strlen(regle);
@@ -281,43 +278,33 @@ void ajoute_regle_fichier(FILE * file, char *regle)
  * @return Une nouvelle chaîne de caractères contenant la règle et les conditions.
  */
 char *regle_en_chaine(char *regle, liste_conditions *conditions) {
-    printf("Regles en chaine\n");
     
-    // Vérifier si les conditions sont nulles
     if (conditions == NULL)
         return regle;
     
-    // Calculer la longueur de la règle actuelle
     size_t regle_len = strlen(regle);
     
-    // Calculer la longueur totale de la règle avec les conditions
     size_t total_len = regle_len;
     liste_conditions *cur_condition = conditions;
     while (cur_condition != NULL) {
-        total_len += strlen(cur_condition->name) + 1; // +1 pour l'espace
+        total_len += strlen(cur_condition->name) + 1; 
         cur_condition = cur_condition->suivant;
     }
-    
-    // Allouer de la mémoire pour la nouvelle règle
-    char *new_regle = (char *)malloc((total_len + 1) * sizeof(char)); // +1 pour le caractère nul de fin de chaîne
+
+    char *new_regle = (char *)malloc((total_len + 1) * sizeof(char)); 
     if (new_regle == NULL) {
         printf("Erreur d'allocation de mémoire\n");
         return NULL;
     }
     
-    // Copier la règle existante dans la nouvelle chaîne
     strcpy(new_regle, regle);
     
-    // Concaténer les noms des conditions à la règle
     cur_condition = conditions;
     while (cur_condition != NULL) {
         strcat(new_regle, cur_condition->name);
         strcat(new_regle, " ");
         cur_condition = cur_condition->suivant;
     }
-    
-    free(new_regle);
-    
     return new_regle;
 }
 
@@ -370,7 +357,6 @@ void insert_regle_base(char *regle, liste_regles **regles, liste_regles **nouvel
     {
         add_regle(regles, dernier, conditions);
         
-        // Dupliquer la liste de conditions pour ajouter à nouvelles_regles
         liste_conditions *conditions_nouvelles = NULL;
         clone_conditions(&conditions_nouvelles, conditions);
         

@@ -95,7 +95,7 @@ elle-même. Ce processus se poursuit de manière récursive jusqu'à ce que tout
 liste aient été imprimées. */
 void print_liste_regles(liste_regles *liste) /////////// RENDRE RECURSIF
 {
-    printf("Printing list of rules:\n");
+    printf("Liste de regles :\n");
     if (liste == NULL)
     {
         printf("List is empty.\n");

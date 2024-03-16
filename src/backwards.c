@@ -29,8 +29,7 @@
  */
 bool chainage_arriere(char *But, liste_regles *Base_de_regles, liste_faits *Base_de_faits, liste_faits *Base_de_faits_manquants){
     if(fait_exists(Base_de_faits, But)){
-        // Print the fact and the Rule that makes it
-        printf("Fact exists: %s\n", But);
+        printf("Fait existant: %s\n", But);
         return true;
     }
     else{
@@ -42,8 +41,7 @@ bool chainage_arriere(char *But, liste_regles *Base_de_regles, liste_faits *Base
                 while(Hypothese != NULL){
                     if(Hypothese->name != NULL){
                         if(!chainage_arriere(Hypothese->name, Base_de_regles, Base_de_faits, Base_de_faits_manquants)){
-                            add_fait(&Base_de_faits_manquants, Hypothese->name); // Add the missing fact to the missing facts list
-                            // Check if there is a rule that can make the missing fact
+                            add_fait(&Base_de_faits_manquants, Hypothese->name);
                             if(chainage_arriere(Hypothese->name, Base_de_regles, Base_de_faits, Base_de_faits_manquants)){
                                 printf("Found a rule to make the missing fact: %s\n", Hypothese->name);
                             } else {
