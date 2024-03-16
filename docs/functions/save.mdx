@@ -4,6 +4,23 @@ title: 'save.c/h'
 
 `save.c` est le fichier source qui contient les fonctions de sauvegarde et de chargement de bases de règles et de faits.
 
+# Sommaire
+
+- [void load_to_list(char *filename, liste_regles **liste)](#void-load-to-list-char-filename-liste-regles-liste)
+- [void load_faits_to_list_recursive(FILE *file, liste_faits **liste)](#void-load-faits-to-list-recursive-file-file-liste-faits-liste)
+- [void load_faits_to_list(char *filename, liste_faits **liste)](#void-load-faits-to-list-char-filename-liste-faits-liste)
+- [void divide_and_add_faits(liste_faits **liste,liste_faits **nouveaux_faits, char *faits)](#void-divide-and-add-faits-liste-faits-liste-liste-faits-nouveaux-faits-char-faits)
+- [void ajoute_fait_fichier(char *fait, FILE *file)](#void-ajoute-fait-fichier-char-fait-file-file)
+- [void enregistrer_liste_fait_recursif (liste_faits *nouveaux_faits, char *filename, FILE *file)](#void-enregistrer-liste-fait-recursif-liste-faits-nouveaux-faits-char-filename-file-file)
+- [void enregistrer_liste_fait(liste_faits *nouveaux_faits, char *filename)](#void-enregistrer-liste-fait-liste-faits-nouveaux-faits-char-filename)
+- [void enregistrer_liste_regle(liste_regles *nouvelles_regles, char *filename)](#void-enregistrer-liste-regle-liste-regles-nouvelles-regles-char-filename)
+- [void enregistrer_liste_regle_recursif (liste_regles *nouvelles_regles, FILE *file)](#void-enregistrer-liste-regle-recursif-liste-regles-nouvelles-regles-file-file)
+- [void ajoute_regle_fichier(FILE * file, char *regle)](#void-ajoute-regle-fichier-file-file-char-regle)
+- [char *regle_en_chaine(char *regle, liste_conditions *conditions)](#char-regle-en-chaine-char-regle-liste-conditions-conditions)
+- [void insert_regle_base(char *regle, liste_regles **regles, liste_regles **nouvelles_regles)](#void-insert-regle-base-char-regle-liste-regles-regles-liste-regles-nouvelles-regles)
+- [void clone_conditions(liste_conditions **dest, liste_conditions *src)](#void-clone-conditions-liste-conditions-dest-liste-conditions-src)
+
+
 # `void load_to_list(char *filename, liste_regles **liste)`
 
 ### Description
@@ -17,8 +34,10 @@ La fonction utilise la fonction [add_rule](/traitement)//TODO pour ajouter les r
 - `liste_regles *regles` : la liste de règles à parcourir (de type [liste_regles](/data-structures/structures#liste-des-regles-liste-regles))
 - `char *filename` : le nom du fichier à charger
 
-### Valeur de retour
+### Retour
 - `void`
+
+---
 
 # `void load_faits_to_list_recursive(FILE *file, liste_faits **liste)`
 
@@ -32,8 +51,10 @@ La fonction commence par lire une ligne du fichier. Si la ligne est vide, la fon
 - `liste_faits *faits` : la liste de faits à parcourir (de type [liste_faits](/data-structures/structures#liste-des-faits-liste-faits))
 - `FILE *file` : le fichier à charger
 
-### Valeur de retour
+### Retour
 - `void`
+
+---
 
 # `void load_faits_to_list_recursive(FILE *file, liste_faits **liste)`
 
@@ -47,8 +68,10 @@ La fonction commence par lire une ligne du fichier. Si la ligne est vide, la fon
 - `liste_faits *faits` : la liste de faits à parcourir (de type [liste_faits](/data-structures/structures#liste-des-faits-liste-faits))
 - `FILE *file` : le fichier à charger
 
-### Valeur de retour
+### Retour
 - `void`
+
+---
 
 # `void load_faits_to_list(char *filename, liste_faits **liste)`
 
@@ -62,8 +85,10 @@ La fonction commence par ouvrir le fichier en mode lecture. Si le fichier n'exis
 - `liste_faits *faits` : la liste de faits à parcourir (de type [liste_faits](/data-structures/structures#liste-des-faits-liste-faits))
 - `char *filename` : le nom du fichier à charger
 
-### Valeur de retour
+### Retour
 - `void`
+
+---
 
 # `void divide_and_add_faits(liste_faits **liste,liste_faits **nouveaux_faits, char *faits)`
 
@@ -80,8 +105,10 @@ La fonction commence par diviser la chaîne de caractères en faits individuels.
 - `liste_faits *nouveaux_faits` : la liste de faits à parcourir (de type [liste_faits](/data-structures/structures#liste-des-faits-liste-faits))
 - `char *faits` : la chaîne de caractères contenant les faits à ajouter
 
-### Valeur de retour
+### Retour
 - `void`
+
+---
 
 # `void ajoute_fait_fichier(char *fait, FILE *file)`
 
@@ -96,8 +123,10 @@ La fonction commence par se placer à la fin du fichier. Ensuite, elle écrit le
 - `char *fait` : la chaîne de caractères représentant le fait à ajouter au fichier
 - `FILE *file` : un pointeur vers le fichier dans lequel ajouter le fait
 
-### Valeur de retour
+### Retour
 - `void`
+
+---
 
 # `void enregistrer_liste_fait_recursif (liste_faits *nouveaux_faits, char *filename, FILE *file)`
 
@@ -113,8 +142,10 @@ La fonction commence par ouvrir le fichier en mode écriture. Si le fichier n'ex
 - `char *filename` : le nom du fichier dans lequel enregistrer les faits
 - `FILE *file` : un pointeur vers le fichier dans lequel enregistrer les faits
 
-### Valeur de retour
+### Retour
 - `void`
+
+---
 
 # `void enregistrer_liste_fait(liste_faits *nouveaux_faits, char *filename)`
 
@@ -130,8 +161,10 @@ La fonction commence par ouvrir le fichier en mode écriture. Si le fichier n'ex
 - `liste_faits *nouveaux_faits` : la liste de faits à parcourir (de type [liste_faits](/data-structures/structures#liste-des-faits-liste-faits))
 - `char *filename` : le nom du fichier dans lequel enregistrer les faits
 
-### Valeur de retour
+### Retour
 - `void`
+
+---
 
 # `void enregistrer_liste_regle(liste_regles *nouvelles_regles, char *filename)`
 
@@ -145,8 +178,10 @@ La fonction commence par ouvrir le fichier en mode écriture. Si le fichier n'ex
 - `liste_regles *nouvelles_regles` : la liste de règles à parcourir (de type [liste_regles](/data-structures/structures#liste-des-regles-liste-regles))
 - `char *filename` : le nom du fichier dans lequel enregistrer les règles
 
-### Valeur de retour
+### Retour
 - `void`
+
+---
 
 # `void enregistrer_liste_regle_recursif (liste_regles *nouvelles_regles, FILE *file)`
 
@@ -161,8 +196,10 @@ La fonction commence par ouvrir le fichier en mode écriture. Si le fichier n'ex
 - `liste_regles *nouvelles_regles` : la liste de règles à parcourir (de type [liste_regles](/data-structures/structures#liste-des-regles-liste-regles))
 - `FILE *file` : un pointeur vers le fichier dans lequel enregistrer les règles
 
-### Valeur de retour
+### Retour
 - `void`
+
+---
 
 # `void ajoute_regle_fichier(FILE * file, char *regle)`
 
@@ -176,8 +213,10 @@ La fonction commence par se placer à la fin du fichier. Ensuite, elle écrit la
 - `FILE *file` : un pointeur vers le fichier dans lequel ajouter la règle
 - `char *regle` : la chaîne de caractères représentant la règle à ajouter au fichier
 
-### Valeur de retour
+### Retour
 - `void`
+
+---
 
 # `char *regle_en_chaine(char *regle, liste_conditions *conditions)`
 ### Description
@@ -190,8 +229,10 @@ La fonction commence par allouer de la mémoire pour la chaîne de caractères. 
 - `char *regle` : le nom de la règle
 - `liste_conditions *conditions` : la liste de conditions de la règle (de type [liste_conditions](/data-structures/structures#liste-des-conditions-liste-conditions))
 
-### Valeur de retour
+### Retour
 - `char *` : la chaîne de caractères représentant la règle
+
+---
 
 # `void insert_regle_base(char *regle, liste_regles **regles, liste_regles **nouvelles_regles)`
 
@@ -206,8 +247,10 @@ La fonction commence par parcourir la liste de règles. Si la règle est déjà 
 - `liste_regles *regles` : la liste de règles à parcourir (de type [liste_regles](/data-structures/structures#liste-des-regles-liste-regles))
 - `liste_regles *nouvelles_regles` : la liste de nouvelles règles à laquelle ajouter la règle (de type [liste_regles](/data-structures/structures#liste-des-regles-liste-regles))
 
-### Valeur de retour
+### Retour
 - `void`
+
+---
 
 # `void clone_conditions(liste_conditions **dest, liste_conditions *src)`
 ### Description
@@ -220,6 +263,6 @@ La fonction commence par parcourir la liste source. Pour chaque condition, elle 
 - `liste_conditions *dest` : la liste de destination (de type [liste_conditions](/data-structures/structures#liste-des-conditions-liste-conditions))
 - `liste_conditions *src` : la liste source (de type [liste_conditions](/data-structures/structures#liste-des-conditions-liste-conditions))
 
-### Valeur de retour
+### Retour
 - `void`
 

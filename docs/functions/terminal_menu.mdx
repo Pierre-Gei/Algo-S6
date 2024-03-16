@@ -4,6 +4,11 @@ title: 'terminal_menu.c/h'
 
 `terminal_menu.c` est le fichier source qui contient le code source du menu CLI.
 
+# Sommaire
+
+- [void menu(void)](#void-menu-void)
+- [void clear_buffer(void)](#void-clear-buffer-void)
+
 # `void menu(void)`
 
 ### Description
@@ -12,16 +17,26 @@ Cette fonction affiche un menu dans le terminal et permet à l'utilisateur de ch
 ### Fonctionnement
 A chaque appel de la fonction, le menu est affiché dans le terminal. L'utilisateur doit entrer un nombre pour choisir une option. Si l'entrée n'est pas un nombre ou si le nombre n'est pas dans l'intervalle des options le programme affiche un message d'erreur et redemande à l'utilisateur de choisir une option.
 Les options sont les suivantes :
-1. Choisir une base de règles (appel [load_to_list](/save#)) //TODO
-2. Choisir une base de faits (appel [load_to_list](/save#)) //TODO
-3. Ajouter des faits à la base de faits (appel [divide_and_add_faits](/save#)) //TODO
-4. Ajouter des règles à la base de règles (appel [ajoute_regle_fichier](/save#)) //TODO
-5. Affichage des faits et règles actuelles (appel [affiche_liste_faits](/traitement#) et [print_liste_regles](/traitement#)) //TODO
-6. Chaînage avant (appel [parcours](/forward#)) //TODO
-7. Chaînage arrière (appel [chainage_arriere](/backwards#)) //TODO
-8. Sauvegarder les faits actuels (appel [enregistrer_liste_fait](/save#)) //TODO
-9. Sauvegarder les règles actuelles (appel [enregistrer_liste_regle](/save#)) //TODO
+1. Choisir une base de règles (appel [load_to_list](save#void-load-to-list-char-filename-liste-regles-liste))
+2. Choisir une base de faits (appel [load_faits_to_list](save#void-load-faits-to-list-char-filename-liste-faits-liste))
+3. Ajouter des faits à la base de faits (appel [divide_and_add_faits](save#void-divide-and-add-faits-liste-faits-liste-liste-faits-nouveaux-faits-char-faits))
+4. Ajouter des règles à la base de règles (appel [ajoute_regle_fichier](save#void-ajoute-fait-fichier-char-fait-file-file))
+5. Affichage des faits et règles actuelles (appel [affiche_liste_faits](traitement#void-affiche-liste-faits-liste-faits-liste) et [print_liste_regles](traitement#void-print-liste-regles-liste-regles-liste))
+6. Chaînage avant (appel [parcours](forward#int-parcours-liste-faits-faits-liste-regles-regles-liste-reponses-reponses))
+7. Chaînage arrière (appel [chainage_arriere](backwards#bool-chainage-arriere-char-but-liste-regles-base-de-regles-liste-faits-base-de-faits-liste-faits-base-de-faits-manquants))
+8. Sauvegarder les faits actuels (appel [enregistrer_liste_fait](save#void-enregistrer-liste-fait-liste-faits-nouveaux-faits-char-filename))
+9. Sauvegarder les règles actuelles (appel [enregistrer_liste_regle](save#void-enregistrer-liste-regle-liste-regles-nouvelles-regles-char-filename))
 10. Quitter le programme
+
+### Paramètres
+
+- `void`
+
+### Retour
+
+- `void`
+
+---
 
 # `void clear_buffer(void)`
 
@@ -30,3 +45,11 @@ Cette fonction vide le buffer d'entrée.
 
 ### Fonctionnement
 La fonction lit les caractères un par un jusqu'à ce que le caractère lu soit un retour à la ligne.
+
+### Paramètres
+
+- `void`
+
+### Retour
+
+- `void`

@@ -4,6 +4,23 @@ title: 'traitement.c/h'
 
 `traitement.c` est le fichier source qui contient les fonctions de traitement des données ainsi que les fonctions d'affichages des données en mode CLI.
 
+# Sommaire
+
+- [void add_regle(liste_regles **liste, char *name, liste_conditions *conditions)](#void-add-regle-liste-regles-liste-char-name-liste-conditions-conditions)
+- [void add_condition(liste_conditions **liste, char *name)](#void-add-condition-liste-conditions-liste-char-name)
+- [void add_condition_to_regle(liste_regles **liste, char *name_regle, char *name_condition)](#void-add-condition-to-regle-liste-regles-liste-char-name-regle-char-name-condition)
+- [void print_liste_regles(liste_regles *liste)](#void-print-liste-regles-liste-regles-liste)
+- [void add_fait(liste_faits **liste, char *fait)](#void-add-fait-liste-faits-liste-char-fait)
+- [void affiche_liste_faits(liste_faits *liste)](#void-affiche-liste-faits-liste-faits-liste)
+- [void liberer_liste_reponses(liste_reponses **liste)](#void-liberer-liste-reponses-liste-reponses-liste)
+- [void liberer_liste_faits(liste_faits **liste)](#void-liberer-liste-faits-liste-faits-liste)
+- [void liberer_liste_conditions(liste_conditions **liste)](#void-liberer-liste-conditions-liste-conditions-liste)
+- [void liberer_liste_regles(liste_regles **liste)](#void-liberer-liste-regles-liste-regles-liste)
+- [void affiche_faits_possibles(liste_regles *liste)](#void-affiche-faits-possibles-liste-regles-liste)
+- [bool reponse_deja_donnee(liste_reponses *liste, char *reponse)](#bool-reponse-deja-donnee-liste-reponses-liste-char-reponse)
+- [void ajouter_reponse(liste_reponses **liste, char *reponse)](#void-ajouter-reponse-liste-reponses-liste-char-reponse)
+
+
 # `void add_regle(liste_regles **liste, char *name, liste_conditions *conditions)`
 
 ### Description

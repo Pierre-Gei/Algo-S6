@@ -4,6 +4,10 @@ title: 'backwards.c/h'
 
 `backwards.c` est le fichier source qui contient l'algorithme de chainage arrière ainsi que toutes les fonctions utiles à son fonctionnement.
 
+# Sommaire
+- [bool chainage_arriere(char *But, liste_regles *Base_de_regles, liste_faits *Base_de_faits, liste_faits *Base_de_faits_manquants)](#bool-chainage-arriere-char-but-liste-regles-base-de-regles-liste-faits-base-de-faits-liste-faits-base-de-faits-manquants)
+- [bool fait_exists(liste_faits *Base_de_faits, char *fait)](#bool-fait-exists-liste-faits-base-de-faits-char-fait)
+
 # `bool chainage_arriere(char *But, liste_regles *Base_de_regles, liste_faits *Base_de_faits, liste_faits *Base_de_faits_manquants)`
 
 ### Description
@@ -20,9 +24,9 @@ La fonction utilise également la fonction [fait_exists](#bool-fait-exists-liste
 - `liste_faits *Base_de_faits_manquants` : la base de faits manquants (de type [liste_faits](../data-structures/structures#liste-des-faits-liste-faits))
 
 ### Retour
-- `true` si le but est atteignable
-- `false` sinon
+- `bool` : `true` si le but est atteignable, `false` sinon
 
+---
 
 # `bool fait_exists(liste_faits *Base_de_faits, char *fait)`
 
@@ -38,5 +42,5 @@ La fonction parcourt itérativement la base de faits pour vérifier si le fait p
 - `char *fait` : le fait à vérifier
 
 ### Retour
-- `true` si le fait est dans la base de faits
-- `false` sinon
+
+- `bool` : `true` si le fait est dans la base de faits, `false` sinon

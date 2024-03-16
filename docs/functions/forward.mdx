@@ -4,6 +4,20 @@ title: 'forward.c/h'
 
 `forward.c` est le fichier source qui contient l'algorithme de chainage avant ainsi que toutes les fonctions utiles à son fonctionnement.
 
+# Sommaire
+
+- [liste_faits *ajout_fait(liste_faits *liste, char *fait)](#liste-faits-ajout-fait-liste-faits-liste-char-fait)
+- [liste_reponses *ajout_reponse(liste_reponses *liste, char *reponse)](#liste-reponses-ajout-reponse-liste-reponses-liste-char-reponse)
+- [int doublon_reponse (liste_reponses *liste, char *reponse)](#int-doublon-reponse-liste-reponses-liste-char-reponse)
+- [int doublon_fait (liste_faits *liste, char *fait)](#int-doublon-fait-liste-faits-liste-char-fait)
+- [int verifier_faits(liste_faits *faits, char *condition)](#int-verifier-faits-liste-faits-faits-char-condition)
+- [int verifier_conditions(liste_faits *faits, liste_conditions *conditions)](#int-verifier-conditions-liste-faits-faits-liste-conditions-conditions)
+- [int parcours(liste_faits *faits, liste_regles *regles, liste_reponses **reponses)](#int-parcours-liste-faits-faits-liste-regles-regles-liste-reponses-reponses)
+- [void copier_liste_reponses(liste_reponses *src, liste_reponses **dest)](#void-copier-liste-reponses-liste-reponses-src-liste-reponses-dest)
+- [int compare_liste_reponses(liste_reponses *liste1, liste_reponses *liste2)](#int-compare-liste-reponses-liste-reponses-liste1-liste-reponses-liste2)
+- [void affiche_liste_reponses(liste_reponses *liste)](#void-affiche-liste-reponses-liste-reponses-liste)
+- [void printf_recursive(liste_reponses *liste) ](#void-printf-recursive-liste-reponses-liste)
+
 # `liste_faits *ajout_fait(liste_faits *liste, char *fait)`
 
 ### Description
@@ -21,6 +35,8 @@ La fonction `ajout_fait` prend en paramètre une liste de faits et un fait à aj
 ### Retour
 - `liste_faits *` : la liste de faits modifiée.
 
+---
+
 # `liste_reponses *ajout_reponse(liste_reponses *liste, char *reponse)`
 
 ### Description
@@ -36,6 +52,8 @@ La fonction `ajout_reponse` prend en paramètre une liste de réponses et une r�
 
 ### Retour
 - `liste_reponses *` : la liste de réponses modifiée.
+
+---
 
 # `int doublon_reponse (liste_reponses *liste, char *reponse)`
 
@@ -55,6 +73,8 @@ La fonction `doublon_reponse` prend en paramètre une liste de réponses et une 
 ### Retour
 - `int` : 1 si la réponse est déjà présente dans la liste, 0 sinon.
 
+---
+
 # `int doublon_fait (liste_faits *liste, char *fait)`
 
 ### Description
@@ -73,6 +93,8 @@ La fonction `doublon_fait` prend en paramètre une liste de faits et un fait à 
 ### Retour
 - `int` : 1 si le fait est déjà présent dans la liste, 0 sinon.
 
+---
+
 # `int verifier_faits(liste_faits *faits, char *condition)`
 
 ### Description
@@ -88,6 +110,8 @@ La fonction `verifier_faits` parcourt la liste de faits et compare chaque élém
 
 ### Retour
 - `int` : 1 si la condition est présente dans la liste, 0 sinon.
+
+---
 
 # `int verifier_conditions(liste_faits *faits, liste_conditions *conditions)`
 
@@ -106,6 +130,8 @@ La fonction `verifier_conditions` parcourt la liste de conditions et compare cha
 
 ### Retour
 - `int` : 1 si la condition est présente dans la liste de faits, 0 sinon.
+
+---
 
 # `int parcours(liste_faits *faits, liste_regles *regles, liste_reponses **reponses)`
 
@@ -127,6 +153,8 @@ La fonction `parcours` parcourt récursivement la liste de règles et vérifie s
 ### Retour
 - `int` : 0
 
+---
+
 # `void copier_liste_reponses(liste_reponses *src, liste_reponses **dest)`
 
 ### Description
@@ -144,6 +172,8 @@ La fonction `copier_liste_reponses` parcourt récursivement la liste source et a
 
 ### Retour
 - `void`
+
+---
 
 # `int compare_liste_reponses(liste_reponses *liste1, liste_reponses *liste2)`
 
@@ -164,6 +194,8 @@ La fonction `compare_liste_reponses` parcourt récursivement les deux listes et 
 ### Retour
 - `int` : 1 si les deux listes sont identiques, 0 sinon.
 
+---
+
 # `void affiche_liste_reponses(liste_reponses *liste)`
 
 ### Description
@@ -179,6 +211,8 @@ La fonction `affiche_liste_reponses` vérifie d'abord si la liste est vide et im
 
 ### Retour
 - `void`
+
+---
 
 # `void printf_recursive(liste_reponses *liste) `
 
