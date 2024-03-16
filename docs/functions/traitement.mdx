@@ -1,0 +1,120 @@
+---
+title: 'traitement.c/h'
+---
+
+`traitement.c` est le fichier source qui contient les fonctions de traitement des données ainsi que les fonctions d'affichages des données en mode CLI.
+
+# `void add_regle(liste_regles **liste, char *name, liste_conditions *conditions)`
+
+### Description
+`add_regle` est une fonction qui ajoute une nouvelle règle à une liste de règles.
+
+### Fonctionnement
+
+La fonction `add_regle` prend en paramètre l'adresse de la tête de liste, le nom de la règle et une liste de conditions associées à la règle. Si la liste est vide, il crée un nouveau nœud pour la règle et le place au début de la liste. Si la liste n'est pas vide, il ajoute récursivement la règle à la fin de la liste.
+
+### Paramètres
+
+- `liste_regles **liste` : l'adresse de la tête de liste (de type [liste_regles](/data-structures/structures#liste-des-regles-liste-regles))
+- `char *name` : le nom de la règle
+- `liste_conditions *conditions` : la liste de conditions à ajouter (de type [liste_conditions](/data-structures/structures#liste-des-conditions-liste-conditions))
+
+### Retour
+
+- `void`
+
+# `void add_condition(liste_conditions **liste, char *name)`
+
+### Description
+
+`add_condition` est une fonction qui ajoute une nouvelle condition à une liste de conditions.
+
+### Fonctionnement
+
+La fonction `add_condition` prend en paramètre l'adresse de la tête de liste et le nom de la condition. Si la liste est vide, il crée un nouveau nœud pour la condition et le place au début de la liste. Si la liste n'est pas vide, il ajoute récursivement la condition à la fin de la liste.
+
+### Paramètres
+
+- `liste_conditions **liste` : l'adresse de la tête de liste (de type [liste_conditions](/data-structures/structures#liste-des-conditions-liste-conditions))
+- `char *name` : le nom de la condition
+
+### Retour
+
+- `void`
+
+# `void add_condition_to_regle(liste_regles **liste, char *name_regle, char *name_condition)`
+
+### Description
+
+`add_condition_to_regle` est une fonction qui ajoute une nouvelle condition à une règle.
+
+### Fonctionnement
+
+La fonction `add_condition_to_regle` prend en paramètre l'adresse de la tête de liste, le nom de la règle et le nom de la condition. Elle parcourt la liste des règles pour trouver la règle correspondante et ajoute la condition à la liste de conditions associée à la règle.
+
+### Paramètres
+
+- `liste_regles **liste` : l'adresse de la tête de liste (de type [liste_regles](/data-structures/structures#liste-des-regles-liste-regles))
+- `char *name_regle` : le nom de la règle
+- `char *name_condition` : le nom de la condition
+
+### Retour
+
+- `void`
+
+# `void print_liste_regles(liste_regles *liste)`
+
+### Description
+
+`print_liste_regles` est une fonction qui affiche la liste des règles.
+
+### Fonctionnement
+
+La fonction `print_liste_regles` prend en paramètre la tête de liste et parcourt la liste des règles pour afficher le nom de chaque règle ainsi que les conditions associées à chaque règle.
+
+### Paramètres
+
+- `liste_regles *liste` : la tête de liste (de type [liste_regles](/data-structures/structures#liste-des-regles-liste-regles))
+
+### Retour
+
+- `void`
+
+# `void add_fait(liste_faits **liste, char *fait)`
+
+### Description
+
+`add_fait` est une fonction qui ajoute un nouveau fait à une liste de faits.
+
+### Fonctionnement
+
+La fonction `add_fait` prend en paramètre l'adresse de la tête de liste et le nom du fait. Si la liste est vide, il crée un nouveau nœud pour le fait et le place au début de la liste. Si la liste n'est pas vide, il ajoute récursivement le fait à la fin de la liste.
+
+### Paramètres
+
+- `liste_faits **liste` : l'adresse de la tête de liste (de type [liste_faits](/data-structures/structures#liste-des-faits-liste-faits))
+- `char *fait` : le nom du fait
+
+### Retour
+
+- `void`
+
+# `void affiche_liste_faits(liste_faits *liste)`
+
+### Description
+
+`affiche_liste_faits` est une fonction qui affiche la liste des faits.
+
+### Fonctionnement
+
+La fonction `affiche_liste_faits` prend en paramètre la tête de liste et parcourt la liste des faits pour afficher le nom de chaque fait.
+
+### Paramètres
+
+- `liste_faits *liste` : la tête de liste (de type [liste_faits](/data-structures/structures#liste-des-faits-liste-faits))
+
+### Retour
+
+- `void`
+
+
