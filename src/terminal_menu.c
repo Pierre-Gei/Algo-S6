@@ -77,7 +77,7 @@ void menu(int argc, char **argv)
                               "║    " COLOR_BLUE "7." COLOR_WHITE " Chaînage arrière                                                                              ║\n"
                               "║    " COLOR_BLACK "8." COLOR_WHITE " Enregister la base de faits                                                                   ║\n"
                               "║    " COLOR_YELLOW "9." COLOR_WHITE " Enregister la base de règles                                                                  ║\n"
-                              "║    " COLOR_YELLOW "10." COLOR_WHITE " Affichage                                                                 ║\n"
+                              "║    " COLOR_YELLOW "10." COLOR_WHITE " Affichage                                                                                    ║\n"
                               "║    " COLOR_RED "11." COLOR_WHITE " Quitter                                                                                      ║\n"
                               "║                                                                                                     ║\n"
                               "╚═════════════════════════════════════════════════════════════════════════════════════════════════════╝\n"
