@@ -14,6 +14,7 @@
 #include "../include/save.h"
 #include "../include/backwards.h"
 #include "../include/traitement.h"
+#include "../include/affichage.h"
 #define TAILLE_MAX 256
 
 // ANSI color codes
@@ -29,7 +30,7 @@
 #define COLOR_RESET "\x1b[0m"
 #define BG "\x1b[48;5;92m"
 
-void menu(void)
+void menu(int argc, char **argv)
 {
     int choice;
     bool quit = false;
@@ -75,7 +76,8 @@ void menu(void)
                               "║    " COLOR_BLUE "7." COLOR_WHITE " Chaînage arrière                                                                              ║\n"
                               "║    " COLOR_BLACK "8." COLOR_WHITE " Enregister la base de faits                                                                   ║\n"
                               "║    " COLOR_YELLOW "9." COLOR_WHITE " Enregister la base de règles                                                                  ║\n"
-                              "║    " COLOR_RED "10." COLOR_WHITE " Quitter                                                                                      ║\n"
+                              "║    " COLOR_YELLOW "10." COLOR_WHITE " Affichage                                                                 ║\n"
+                              "║    " COLOR_RED "11." COLOR_WHITE " Quitter                                                                                      ║\n"
                               "║                                                                                                     ║\n"
                               "╚═════════════════════════════════════════════════════════════════════════════════════════════════════╝\n"
                               "\n"
@@ -197,7 +199,13 @@ void menu(void)
                 liberer_liste_regles(&nouvelles_regles);
             nouvelles_regles = NULL;
             break;
+
         case 10:
+            affiche(argc, argv);
+            break;
+
+
+        case 11:
             system("clear");
             printf("Au revoir \n");
                 liberer_liste_faits(&nouveaux_faits);
