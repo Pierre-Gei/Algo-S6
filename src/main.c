@@ -10,13 +10,6 @@
 
 
 int main(int argc, char *argv[]){
-    if (argc > 1) {
-        if (strcmp(argv[1], "-cli") == 0) {
-            menu();
-        }
-    }
-    else{
-        affiche(argc, argv);
-    }
+    menu(argc,argv);
     return 0;
 }

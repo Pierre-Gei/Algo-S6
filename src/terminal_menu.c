@@ -4,6 +4,7 @@
 
 #include <stdio.h>
 #include "../include/terminal_menu.h"
+#include "../include/affichage.h"
 
 
 #include <stdio.h>
@@ -34,7 +35,7 @@
 #define BG "\x1b[48;5;92m"
 
 
-void menu(void){
+void menu(int argc, char *argv[]){
     int choice;
     bool quit = false;
     char *nom_base_regles = malloc(TAILLE_MAX * sizeof(char));
@@ -73,8 +74,9 @@ void menu(void){
                "║    "COLOR_MAGENTA"4."COLOR_WHITE" Ajouter des règles à la base de règles                                                        ║\n"
                "║    "COLOR_GREEN"5."COLOR_WHITE" Affichage des faits et règles actuelles                                                       ║\n"
                "║    "COLOR_MAGENTA"6."COLOR_WHITE" Chaînage avant                                                                                ║\n"
-               "║    "COLOR_BLUE"7."COLOR_WHITE" Chaînage arrière                                                                              ║\n"
-               "║    "COLOR_BLACK"8."COLOR_WHITE" Quitter                                                                                       ║\n"
+               "║    "COLOR_BLUE"7."COLOR_WHITE" Chaînage arrière  "
+               "║    "COLOR_BLUE"8."COLOR_WHITE" Affichage                                                                              ║\\n\"                                                                            ║\n"
+               "║    "COLOR_BLACK"9."COLOR_WHITE" Quitter                                                                                       ║\n"
                "║                                                                                                     ║\n"
                "╚═════════════════════════════════════════════════════════════════════════════════════════════════════╝\n"
                "\n"
@@ -166,7 +168,12 @@ void menu(void){
                 free(temp_fait);
 
                 break;
+
             case 8:
+                affiche(argc,argv);
+                break;
+
+            case 9:
                 system("clear");
                 printf("Au revoir \n");
                 liberer_liste_faits(&faits);

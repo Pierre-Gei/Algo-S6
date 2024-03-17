@@ -15,8 +15,10 @@
 #include "../gfxlib/include/GfxLib.h" // Seul cet include est necessaire pour faire du graphique
 #include "../gfxlib/include/BmpLib.h" // Cet include permet de manipuler des fichiers BMP
 #include "../gfxlib/include/ESLib.h" // Pour utiliser valeurAleatoire()
+#include "structures.h"
 
-
+typedef enum {MenuPrincipal, Questionnaire, Liste, Arriere, Avant}
+        StateAffichage;
 
 void cercle(float centreX, float centreY, float rayon);
 void gestionEvenement(EvenementGfx evenement);
