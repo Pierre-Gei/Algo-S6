@@ -17,7 +17,7 @@ typedef struct liste_conditions {
 } liste_conditions;
 
 typedef struct liste_faits {
-    char * fait;
+    char *fait;
     struct liste_faits *suivant;
 } liste_faits;
 
