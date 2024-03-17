@@ -1,0 +1,46 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "Pokédaine Industries",
+  "favicon": "/favicon.svg",
+  "colors": {
+    "primary": "#0D9373",
+    "light": "#07C983",
+    "dark": "#0D9373",
+    "anchors": {
+      "from": "#0D9373",
+      "to": "#07C983"
+    }
+  },
+  "navigation": [
+    {
+      "group": "Get Started",
+      "pages": [
+        "get-started/introduction",
+        "get-started/installation",
+        "get-started/usage"
+      ]
+    },
+    {
+      "group": "Structures de données",
+        "pages": [
+            "data-structures/introduction",
+            "data-structures/structures"
+        ]
+    },
+    {
+      "group": "Architecture et fonctions",
+      "pages": [
+        "functions/introduction",
+        "functions/main",
+        "functions/terminal_menu",
+        "functions/backwards",
+        "functions/forward",
+        "functions/save",
+        "functions/traitement"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "github": "https://github.com/Pierre-Gei/Algo-S6/"
+  }
+}

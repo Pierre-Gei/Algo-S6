@@ -1,0 +1,34 @@
+---
+title: Introduction
+---
+
+Le projet Pokedaine Industries est un système expert développé dans le cadre d'un projet d'algorithmique en C à l'ISEN Toulon. Le système est conçu pour gérer et manipuler des listes de faits et de règles, permettant ainsi de réaliser des chaînages avant et arrière.
+
+## Membres du projet et rôles
+
+- **BARBIER Léo** : Interface utilisateur GFXlib
+- **FERNANDO Théo** : Chaînage avant, insertion de faits et de règles dans les bases, sauvegarde des bases dans les fichiers
+- **GEIGUER Pierre** : Chaînage arrière, structure de données, interface utilisateur terminal, lecture des bases depuis les fichiers, documentation
+- **TURCOTTI Quentin** :  Design et implémentation Interface utilisateur GFXlib
+
+## Objectifs du projet et fonctionnalités implémentées
+
+- Chaînage avant
+- Chaînage arrière
+- Exemple d’une base de connaissance
+- Explication de la démonstration (les règles utilisées dans l’ordre d’utilisation)
+- Architecture en groupe et découpage et attribution des tâches de manière individuelle
+- Interface utilisateur en mode texte
+- Interface utilisateur en mode graphique (GFXlib)
+
+## Structure du projet
+
+Le projet est structuré en plusieurs fichiers source et en-têtes qui définissent les différentes fonctionnalités du système.
+
+- `main.c` : C'est le point d'entrée du programme. Il appelle la fonction menu pour démarrer l'interaction avec l'utilisateur.
+- `terminal_menu.c` et `terminal_menu.h` : Ces fichiers gèrent l'interface utilisateur dans le terminal. Ils fournissent un menu interactif pour choisir des bases de règles et de faits, ajouter des faits et des règles, afficher les faits et les règles actuels, effectuer un chaînage avant, un chaînage arrière et quitter le programme.
+- `forward.c`, `forward.h`, `backwards.c` et `backwards.h` : Ces fichiers implémentent les algorithmes de chaînage avant et arrière. Ils contiennent des fonctions pour vérifier les faits, copier et comparer les listes de réponses, et parcourir les listes de règles.
+- `traitement.c` et `traitement.h` : Ces fichiers contiennent des fonctions pour ajouter des faits et des règles à leurs listes respectives, afficher les listes de faits et de règles, et libérer la mémoire allouée pour les listes.
+- `save.c` et `save.h` : Ces fichiers gèrent le chargement et la sauvegarde des faits et des règles à partir de fichiers. Ils contiennent des fonctions pour charger des faits et des règles à partir de fichiers, ajouter des faits et des règles à des fichiers, et diviser et ajouter des faits à une liste de faits.
+- `structures.h` : Ce fichier définit les structures de données utilisées dans le projet, y compris les listes de faits, de règles, de conditions et de réponses.
+- `affichage.c` et `affichage.h` : Ces fichiers contiennent des fonctions pour afficher l'interface utilisateur en mode graphique. Ils utilisent la bibliothèque GFXlib pour afficher des fenêtres, des boutons, des zones de texte et des listes déroulantes.

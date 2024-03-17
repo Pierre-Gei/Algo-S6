@@ -1,0 +1,46 @@
+---
+title: 'backwards.c/h'
+---
+
+`backwards.c` est le fichier source qui contient l'algorithme de chainage arrière ainsi que toutes les fonctions utiles à son fonctionnement.
+
+# Sommaire
+- [bool chainage_arriere(char *But, liste_regles *Base_de_regles, liste_faits *Base_de_faits, liste_faits *Base_de_faits_manquants)](#bool-chainage-arriere-char-but-liste-regles-base-de-regles-liste-faits-base-de-faits-liste-faits-base-de-faits-manquants)
+- [bool fait_exists(liste_faits *Base_de_faits, char *fait)](#bool-fait-exists-liste-faits-base-de-faits-char-fait)
+
+# `bool chainage_arriere(char *But, liste_regles *Base_de_regles, liste_faits *Base_de_faits, liste_faits *Base_de_faits_manquants)`
+
+### Description
+Cette fonction permet de réaliser un chainage arrière sur la base de faits et la base de règles pour déterminer si le but est atteignable.
+
+### Fonctionnement
+La fonction commence par vérifier si le but est déjà dans la base de faits. Si c'est le cas, elle retourne `true`. Sinon, elle parcourt la base de règles pour trouver une règle qui a le but comme conclusion. Si elle trouve une telle règle, elle appelle récursivement `chainage_arriere` pour chaque prémisse de la règle. Si toutes les prémisse sont vérifiées, la fonction retourne `true`. Sinon, elle retourne `false`.
+La fonction utilise également la fonction [fait_exists](#bool-fait-exists-liste-faits-base-de-faits-char-fait) pour détecter si un fait est dans la base de faits.
+
+### Paramètres
+- `char *But` : le but à atteindre
+- `liste_regles *Base_de_regles` : la base de règles (de type [liste_regles](../data-structures/structures#liste-des-regles-liste-regles))
+- `liste_faits *Base_de_faits` : la base de faits (de type [liste_faits](../data-structures/structures#liste-des-faits-liste-faits))
+- `liste_faits *Base_de_faits_manquants` : la base de faits manquants (de type [liste_faits](../data-structures/structures#liste-des-faits-liste-faits))
+
+### Retour
+- `bool` : `true` si le but est atteignable, `false` sinon
+
+---
+
+# `bool fait_exists(liste_faits *Base_de_faits, char *fait)`
+
+### Description
+Cette fonction permet de vérifier si un fait est dans la base de faits.
+
+### Fonctionnement
+
+La fonction parcourt itérativement la base de faits pour vérifier si le fait passé en paramètre est dans la base de faits.
+
+### Paramètres
+- `liste_faits *Base_de_faits` : la base de faits (de type [liste_faits](../data-structures/structures#liste-des-faits-liste-faits))
+- `char *fait` : le fait à vérifier
+
+### Retour
+
+- `bool` : `true` si le fait est dans la base de faits, `false` sinon
