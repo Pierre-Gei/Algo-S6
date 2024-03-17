@@ -1,7 +1,3 @@
-//
-// Created by Pierre Geiguer on 11/03/2024.
-//
-
 #include "../include/forward.h"
 #include <stdio.h>
 #include <stdlib.h>

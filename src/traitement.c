@@ -1,8 +1,3 @@
-//
-// Created by Pierre Geiguer on 12/03/2024.
-//
-
-
 #include <string.h>
 #include "../include/traitement.h"
 #include "stdio.h"

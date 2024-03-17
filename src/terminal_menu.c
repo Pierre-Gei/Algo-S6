@@ -1,7 +1,3 @@
-//
-// Created by Pierre Geiguer on 12/03/2024.
-//
-
 #include <stdio.h>
 #include "../include/terminal_menu.h"
 
@@ -15,7 +11,7 @@
 #include "../include/backwards.h"
 #include "../include/traitement.h"
 #include "../include/affichage.h"
-#include "../gfxlib/include/GfxLib.h"
+
 #define TAILLE_MAX 256
 
 // ANSI color codes

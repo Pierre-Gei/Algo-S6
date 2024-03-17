@@ -1,7 +1,3 @@
-//
-// Created by Pierre Geiguer on 12/03/2024.
-//
-
 #include <string.h>
 #include <ctype.h>
 #include "../include/save.h"

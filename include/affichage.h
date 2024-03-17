@@ -1,9 +1,3 @@
-//
-// Created by quent on 14/03/2024.
-//
-
-
-
 #ifndef ALGO_S6_AFFICHAGE_H
 #define ALGO_S6_AFFICHAGE_H
 

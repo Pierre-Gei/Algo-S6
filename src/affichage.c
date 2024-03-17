@@ -1,21 +1,15 @@
-#include <stdlib.h> // Pour pouvoir utiliser exit()
-#include <stdio.h> // Pour pouvoir utiliser printf()
-#include <math.h> // Pour pouvoir utiliser sin() et cos()
+#include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
-#include "../gfxlib/include/GfxLib.h" // Seul cet include est necessaire pour faire du graphique
-#include "../gfxlib/include/BmpLib.h" // Cet include permet de manipuler des fichiers BMP
-#include "../gfxlib/include/ESLib.h" // Pour utiliser valeurAleatoire()
+#include "../gfxlib/include/GfxLib.h"
+#include "../gfxlib/include/BmpLib.h"
 #include "../include/affichage.h"
-#include "../include/backwards.h"
-#include "../include/save.h"
-#include "../include/terminal_menu.h"
 
-// Largeur et hauteur par defaut d'une image correspondant a nos criteres
+
+
 #define LargeurFenetre 1400
 #define HauteurFenetre 800
 
-/* La fonction de gestion des evenements, appelee automatiquement par le systeme
-des qu'une evenement survient */
 static StateAffichage state = MenuPrincipal;
 int aff = 0;
 
@@ -29,15 +23,11 @@ int affiche(int argc, char **argv)
 
     prepareFenetreGraphique("OpenGL", LargeurFenetre, HauteurFenetre);
 
-    /* Lance la boucle qui aiguille les evenements sur la fonction gestionEvenement ci-apres,
-        qui elle-meme utilise fonctionAffichage ci-dessous */
     lanceBoucleEvenements();
 
     return 0;
 }
 
-/* La fonction de gestion des evenements, appelee automatiquement par le systeme
-des qu'une evenement survient */
 void gestionEvenement(EvenementGfx evenement)
 {
     static bool pleinEcran = false;       // Pour savoir si on est en mode plein ecran ou pas
@@ -74,7 +64,6 @@ void gestionEvenement(EvenementGfx evenement)
             {
                 case MenuPrincipal:
 
-                    // On part d'un fond d'ecran blanc
                     effaceFenetre(255, 255, 255);
 
                     couleurCourante(55, 250, 34);
@@ -82,16 +71,13 @@ void gestionEvenement(EvenementGfx evenement)
                     afficheChaine("Les Recettes de Mamie", 50, largeurFenetre() / 3.5, hauteurFenetre() * 5 / 6 + hauteurFenetre() * 1 / 32);
                     afficheChaine("Menu Principal", 50, largeurFenetre() / 3.5, hauteurFenetre() * 5 / 6 + hauteurFenetre() * 1 / 10);
 
-                    // Affichage d'une image
-                    if (image != NULL) // Si l'image a pu etre lue
+                    if (image != NULL)
                     {
-                        // On affiche l'image
                         ecrisImage((largeurFenetre() - image->largeurImage) / 15, (hauteurFenetre() - image->hauteurImage) / 1.05, image->largeurImage, image->hauteurImage, image->donneesRGB);
                     }
 
-                    if (image2 != NULL) // Si l'image a pu etre lue
+                    if (image2 != NULL)
                     {
-                        // On affiche l'image
                         ecrisImage((largeurFenetre() - image2->largeurImage) / 1.07, (hauteurFenetre() - image2->hauteurImage) / 1.05, image2->largeurImage, image2->hauteurImage, image2->donneesRGB);
                     }
 
@@ -115,10 +101,9 @@ void gestionEvenement(EvenementGfx evenement)
                     afficheChaine("Les Recettes de Mamie", 50, largeurFenetre() / 3.5, hauteurFenetre() * 5 / 6 + hauteurFenetre() * 1 / 32);
                     afficheChaine("Menu Questionnaire", 50, largeurFenetre() / 3.5, hauteurFenetre() * 5 / 6 + hauteurFenetre() * 1 / 10);
 
-                    // Affichage d'une image
-                    if (image3 != NULL) // Si l'image a pu etre lue
+
+                    if (image3 != NULL)
                     {
-                        // On affiche l'image
                         ecrisImage((largeurFenetre() - image3->largeurImage) / 2, (hauteurFenetre() - image3->hauteurImage) / 2, image3->largeurImage, image3->hauteurImage, image3->donneesRGB);
                     }
 
@@ -187,7 +172,7 @@ void gestionEvenement(EvenementGfx evenement)
 
                     couleurCourante(0, 0, 0);
                     afficheChaine("Avant", 30, largeurFenetre() / 2.35, hauteurFenetre() - hauteurFenetre() / 2.07);
-                    afficheChaine("Arrière", 30, largeurFenetre() / 2.55, hauteurFenetre() - hauteurFenetre() / 1.63);
+                    afficheChaine("Arriere", 30, largeurFenetre() / 2.55, hauteurFenetre() - hauteurFenetre() / 1.63);
 
                     // Affichage des retour arriere
                     couleurCourante(192, 192, 192);
@@ -243,7 +228,7 @@ void gestionEvenement(EvenementGfx evenement)
                     couleurCourante(55, 250, 34);
                     epaisseurDeTrait(3);
                     afficheChaine("Les Recettes de Mamie", 50, largeurFenetre() / 3.5, hauteurFenetre() * 5 / 6 + hauteurFenetre() * 1 / 32);
-                    afficheChaine("Menu Chainage Arrière", 50, largeurFenetre() / 3.5, hauteurFenetre() * 5 / 6 + hauteurFenetre() * 1 / 10);
+                    afficheChaine("Menu Chainage Arriere", 50, largeurFenetre() / 3.5, hauteurFenetre() * 5 / 6 + hauteurFenetre() * 1 / 10);
 
                     // Affichage d'une image
                     if (image3 != NULL) // Si l'image a pu etre lue
@@ -303,40 +288,18 @@ void gestionEvenement(EvenementGfx evenement)
 
             switch (caractereClavier())
             {
-                case 'Q': /* Pour sortir quelque peu proprement du programme */
-                case 'q':
+                case '*':
                     libereDonneesImageRGB(&image); /* On libere la structure image,
     c'est plus propre, meme si on va sortir du programme juste apres */
                     termineBoucleEvenements();
                     break;
 
-                case 'F':
-                case 'f':
+                case '=':
                     pleinEcran = !pleinEcran; // Changement de mode plein ecran
                     if (pleinEcran)
                         modePleinEcran();
                     else
                         redimensionneFenetre(LargeurFenetre, HauteurFenetre);
-                    break;
-
-                case 'R':
-                case 'r':
-                    // Configure le systeme pour generer un message Temporisation
-                    // toutes les 20 millisecondes (rapide)
-                    demandeTemporisation(20);
-                    break;
-
-                case 'L':
-                case 'l':
-                    // Configure le systeme pour generer un message Temporisation
-                    // toutes les 100 millisecondes (lent)
-                    demandeTemporisation(100);
-                    break;
-
-                case 'S':
-                case 's':
-                    // Configure le systeme pour ne plus generer de message Temporisation
-                    demandeTemporisation(-1);
                     break;
 
                 default:
@@ -361,13 +324,11 @@ void gestionEvenement(EvenementGfx evenement)
                         if (abscisseSouris() < 3.5 * largeurFenetre() / 4 && abscisseSouris() > largeurFenetre() / 8 && ordonneeSouris() < hauteurFenetre() - hauteurFenetre() / 2.31 && ordonneeSouris() > hauteurFenetre() - hauteurFenetre() / 2)
                         {
                             state = Questionnaire;
-                            printf("Questionnaire\n");
                         }
 
                         if (abscisseSouris() < 3.5 * largeurFenetre() / 4 && abscisseSouris() > largeurFenetre() / 8 && ordonneeSouris() < hauteurFenetre() - hauteurFenetre() / 1.76 && ordonneeSouris() > hauteurFenetre() - hauteurFenetre() / 1.58)
                         {
                             state = Liste;
-                            printf("Liste\n");
                         }
 
                         if (abscisseSouris() < 3.5 * largeurFenetre() / 4 && abscisseSouris() > largeurFenetre() / 8 && ordonneeSouris() < hauteurFenetre() - hauteurFenetre() / 1.43 && ordonneeSouris() > hauteurFenetre() - hauteurFenetre() / 1.30)
@@ -443,7 +404,7 @@ void gestionEvenement(EvenementGfx evenement)
                         }
                         if (abscisseSouris() > largeurFenetre() / 13 && abscisseSouris() < largeurFenetre() - largeurFenetre() / 1.2 && ordonneeSouris() < hauteurFenetre() - hauteurFenetre() / 1.45 && ordonneeSouris() > hauteurFenetre() - hauteurFenetre() / 1.3)
                         {
-                            printf("oui");
+
                         }
                         break;
                 }

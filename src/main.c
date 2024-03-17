@@ -1,7 +1,3 @@
-//
-// Created by quent on 14/03/2024.
-//
-
 #include "../include/terminal_menu.h"
 #include "../include/affichage.h"
 #include <string.h>
