@@ -16,6 +16,9 @@
 #include "../gfxlib/include/BmpLib.h" // Cet include permet de manipuler des fichiers BMP
 #include "../gfxlib/include/ESLib.h" // Pour utiliser valeurAleatoire()
 #include "structures.h"
+#include "backwards.h"
+#include "traitement.h"
+#include "terminal_menu.h"
 
 typedef enum {MenuPrincipal, Questionnaire, Liste, Arriere, Avant}
         StateAffichage;
@@ -23,3 +26,5 @@ typedef enum {MenuPrincipal, Questionnaire, Liste, Arriere, Avant}
 void cercle(float centreX, float centreY, float rayon);
 void gestionEvenement(EvenementGfx evenement);
 int affiche(int argc, char **argv);
+
+
